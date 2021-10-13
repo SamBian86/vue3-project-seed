@@ -1,0 +1,15 @@
+{
+  "api代码片段delete删除多个": {
+    "prefix": "api_delete_json",
+    "body": [
+      "export function delete$1(data: any) {\r",
+      "  return request.delete({\r",
+      "    url: `$2`,\r",
+      "    data\r",
+      "  })\r",
+      "}",
+      ""
+    ],
+    "description": "api代码片段delete删除多个"
+  }
+}

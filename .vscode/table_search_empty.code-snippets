@@ -1,0 +1,7 @@
+{
+  "列表select查询框空单元格": {
+    "prefix": "table_search_empty",
+    "body": ["<el-col :xs=\"StyleEnum.COL_XS\" :sm=\"StyleEnum.COL_SM\" :md=\"16\" :lg=\"16\" :xl=\"16\"></el-col>\r"],
+    "description": "表单select查询框空单元格"
+  }
+}

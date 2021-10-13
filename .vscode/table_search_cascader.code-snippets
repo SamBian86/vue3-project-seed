@@ -1,0 +1,31 @@
+{
+  "列表cascader查询框": {
+    "prefix": "table_search_cascader",
+    "body": [
+      "<el-col :xs=\"StyleEnum.COL_XS\" :sm=\"StyleEnum.COL_SM\" :md=\"4\" :lg=\"4\" :xl=\"4\">\r",
+      "  <el-form-item prop=\"bbb\">\r",
+      "    <el-cascader\r",
+      "      :class=\"'form-page-cascader'\"\r",
+      "      :size=\"StyleEnum.FORM_SIZE\"\r",
+      "      v-model=\"tableParams.bbb\"\r",
+      "      :options=\"sysDeptTree\"\r",
+      "      :props=\"cascaderProps\"\r",
+      "      :placeholder=\"$$t('AAA.bbbPlaceHolder')\"\r",
+      "    ></el-cascader>\r",
+      "  </el-form-item>\r",
+      "</el-col>\r",
+      "\r",
+      "import useSysDeptRepository from '/@/views/pages/sys/dept/useSysDeptRepository' // 模板修改标记\r",
+      "const { sysDeptTree, getSysDeptTreeHandle } = useSysDeptRepository()\r",
+      "getSysDeptTreeHandle()\r",
+      "    const cascaderProps = ref({\r",
+      "      label: 'label',\r",
+      "      value: 'id',\r",
+      "      checkStrictly: true,\r",
+      "      emitPath: false\r",
+      "    })\r",
+      ""
+    ],
+    "description": "列表cascader查询框"
+  }
+}

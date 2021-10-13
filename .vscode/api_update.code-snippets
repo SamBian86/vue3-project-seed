@@ -1,0 +1,17 @@
+{
+  "api代码片段edit编辑": {
+    "prefix": "api_update",
+    "body": [
+      "export function update$1(data: any) {\r",
+      "  return request.put({\r",
+      "    url: `$2`,\r",
+      "    data\r",
+      "  }, {\r",
+      "    headers: { 'Content-Type': ContentTypeEnum.JSON }\r",
+      "  })\r",
+      "}",
+      ""
+    ],
+    "description": "api代码片段edit编辑"
+  }
+}

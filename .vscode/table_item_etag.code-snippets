@@ -1,0 +1,14 @@
+{
+  "列表item_etag_options": {
+    "prefix": "table_item_etag",
+    "body": [
+      "<el-table-column prop='$1bbb' :show-overflow-tooltip='true' :label='$$t(\"AAA.bbb\")' width='100'>\r",
+      "  <template #default='scope'>\r",
+      "    <el-tag v-if='scope.row.bbb?? === 0' :size=\"StyleEnum.TAG_SIZE\" type='success'>{{ $$t(\"AAA.bbb\") }}</el-tag>\r",
+      "  </template>\r",
+      "</el-table-column>\r",
+      ""
+    ],
+    "description": "列表item_etag_options"
+  }
+}

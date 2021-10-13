@@ -1,0 +1,18 @@
+{
+  "表单校验validator": {
+    "prefix": "form_rules_validator",
+    "body": [
+      "bbb: [\r",
+      "  {\r",
+      "    required: true,\r",
+      "    trigger: 'blur',\r",
+      "    validator: (rule: any, value: any, callback: any) => {\r",
+      "      validatePhoneHandle(rule, value, callback, t)\r",
+      "    }\r",
+      "  }\r",
+      "], // 模板修改标记\r",
+      ""
+    ],
+    "description": "表单校验validator"
+  }
+}

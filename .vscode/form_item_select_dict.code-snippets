@@ -1,0 +1,26 @@
+{
+  "表单字典类型select框": {
+    "prefix": "form_item_select_dict",
+    "body": [
+      "<el-form-item :label=\"$$t('AAA.bbb')\" prop=\"bbb\">\r",
+      "  <el-select\r",
+      "    class=\"el-select-block\"\r",
+      "    :size=\"StyleEnum.FORM_SIZE\"\r",
+      "    v-model=\"formData.bbb\"\r",
+      "    :placeholder=\"$$t('AAA.bbbPlaceHolder')\"\r",
+      "    filterable\r",
+      "    clearable\r",
+      "  >\r",
+      "    <el-option\r",
+      "      v-for=\"item in getDictByType('bbb')\"\r",
+      "      :key=\"item.dictValue\"\r",
+      "      :label=\"item.dictLabel\"\r",
+      "      :value=\"item.dictValue\"\r",
+      "    ></el-option>\r",
+      "  </el-select>\r",
+      "</el-form-item>\r",
+      ""
+    ],
+    "description": "表单字典类型select框"
+  }
+}

@@ -1,0 +1,61 @@
+.form_item_upload_file_wrapper_container
+  display: flex
+  flex-wrap: wrap
+  .form_item_upload_file_item
+    margin-right: 10px
+.form_item_upload_file
+  .el-upload--picture-card
+    height: 30px
+    line-height: 30px
+    width: 100%
+.form_item_upload_image_wrapper // 图片容器
+  position: relative
+  overflow: hidden
+  margin-bottom: 10px
+  .form_item_upload_image
+    // height: 100px
+    // width: 100%
+  .form_item_upload_delete
+    display: none
+  &:hover .form_item_upload_delete
+    display: block
+    position: absolute
+    right: 0px
+    top: 0px
+    font-size: 20px
+    cursor: pointer
+    color: #000
+    background: rgba(255, 255, 255, 0.5)
+  .form_item_upload_item_type
+    position: absolute
+    right: 0
+    bottom: 0
+.form_item_upload_file_wrapper,.form_item_upload_video_wrapper,.form_item_upload_audio_wrapper // 文件容器
+  position: relative
+  overflow: hidden
+  margin-bottom: 10px
+  .form_item_upload_file
+    height: 30px
+    line-height: 30px
+    font-size: 14px
+  .form_item_upload_delete
+    display: none
+  &:hover .form_item_upload_delete
+    display: block
+    position: absolute
+    right: 0px
+    top: 0px
+    font-size: 20px
+    cursor: pointer
+    z-index: 100
+    color: #000
+  .form_item_upload_item_type
+    position: absolute
+    right: 0
+    bottom: 0
+    // height: 30px
+    overflow: hidden
+    .form_item_upload_item_type_image
+      width: 30px
+      height: 30px
+      overflow: hidden

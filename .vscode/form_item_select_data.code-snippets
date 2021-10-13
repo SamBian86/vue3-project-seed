@@ -1,0 +1,21 @@
+{
+  "表单select框从特定api中获取数据": {
+    "prefix": "form_item_select_data",
+    "body": [
+      "<el-form-item :label=\"$$t('AAA.bbb')\" prop=\"bbb\">\r",
+      "  <el-select\r",
+      "    class=\"el-select-block\"\r",
+      "    :size=\"StyleEnum.FORM_SIZE\"\r",
+      "    v-model=\"formData.bbb\"\r",
+      "    :placeholder=\"$$t('AAA.bbbPlaceHolder')\"\r",
+      "    filterable\r",
+      "    clearable\r",
+      "  >\r",
+      "    <el-option v-for=\"item in AAAList\" :key=\"item.id\" :label=\"item.name\" :value=\"item.id\"></el-option>\r",
+      "  </el-select>\r",
+      "</el-form-item>\r",
+      ""
+    ],
+    "description": "表单select框从特定api中获取数据"
+  }
+}

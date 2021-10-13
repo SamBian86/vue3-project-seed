@@ -1,0 +1,41 @@
+{
+  "列表col区域button_上下移操作": {
+    "prefix": "table_item_button_exchange",
+    "body": [
+      "pgTable添加 @get-tabel-useful-data='getTableUsefulDataHandle'\r",
+      "usePgTableComponent 添加 tableUsefulData, getTableUsefulDataHandle\r",
+      "<el-button\r",
+      "  type=\"text\"\r",
+      "  v-if=\"filterPermission('xxx:xxx:xxx') && scope.$$index !== 0\"\r",
+      "  :size=\"StyleEnum.BUTTON_SIZE\"\r",
+      "  @click=\"\r",
+      "    exchangeXXXHandle(\r",
+      "      { id: scope.row.id, exchangeId: tableUsefulData['data'][scope.$$index - 1]['id'] },\r",
+      "      () => {\r",
+      "        pgTableQuery(tableParams)\r",
+      "      }\r",
+      "    )\r",
+      "  \"\r",
+      ">\r",
+      "  {{ $$t('table.up') }}\r",
+      "</el-button>\r",
+      "<el-button\r",
+      "  type=\"text\"\r",
+      "  v-if=\"filterPermission('xxx:xxx:xxx') && scope.$$index !== tableUsefulData.len - 1\"\r",
+      "  :size=\"StyleEnum.BUTTON_SIZE\"\r",
+      "  @click=\"\r",
+      "    exchangeXXXHandle(\r",
+      "      { id: scope.row.id, exchangeId: tableUsefulData.data[scope.$$index + 1]['id'] },\r",
+      "      () => {\r",
+      "        pgTableQuery(tableParams)\r",
+      "      }\r",
+      "    )\r",
+      "  \"\r",
+      ">\r",
+      "  {{ $$t('table.down') }}\r",
+      "</el-button>\r",
+      ""
+    ],
+    "description": "列表col区域button_上下移操作"
+  }
+}

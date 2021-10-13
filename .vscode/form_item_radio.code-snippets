@@ -1,0 +1,20 @@
+{
+  "表单radio": {
+    "prefix": "form_item_radio",
+    "body": [
+      "<el-form-item :label=\"$$t('AAA.bbb')\" prop=\"bbb\">\r",
+      "  <el-radio-group v-model=\"formData.bbb\">\r",
+      "    <el-radio-button v-for=\"item in bbbItems\" :label=\"item.label\">\r",
+      "      {{ item.name }}\r",
+      "    </el-radio-button>\r",
+      "  </el-radio-group>\r",
+      "</el-form-item>\r",
+      "const bbbItems = ref([\r",
+      "  { name: '菜单', label: 0 },\r",
+      "  { name: '按钮', label: 1 }\r",
+      "])\r",
+      ""
+    ],
+    "description": "表单radio"
+  }
+}

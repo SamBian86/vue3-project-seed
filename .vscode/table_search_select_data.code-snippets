@@ -1,0 +1,28 @@
+{
+  "列表select查询框data": {
+    "prefix": "table_search_select_data",
+    "body": [
+      "<el-col :xs=\"StyleEnum.COL_XS\" :sm=\"StyleEnum.COL_SM\" :md=\"4\" :lg=\"4\" :xl=\"4\">\r",
+      "  <el-form-item prop='$1bbb'>\r",
+      "    <el-select\r",
+      "      class=\"el-select-block\"\r",
+      "      :size=\"StyleEnum.FORM_SIZE\"\r",
+      "      v-model=\"tableParams.$2bbb\"\r",
+      "      :placeholder='$$t(\"$3AAA.bbbPlaceHolder\")'\r",
+      "      filterable\r",
+      "      clearable\r",
+      "    >\r",
+      "      <el-option\r",
+      "        v-for=\"item in $4??\"\r",
+      "        :key=\"item.value\"\r",
+      "        :label=\"item.label\"\r",
+      "        :value=\"item.value\"\r",
+      "      ></el-option>\r",
+      "    </el-select>\r",
+      "  </el-form-item>\r",
+      "</el-col>\r",
+      ""
+    ],
+    "description": "列表select查询框data"
+  }
+}

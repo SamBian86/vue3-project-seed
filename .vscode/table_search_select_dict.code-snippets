@@ -1,0 +1,28 @@
+{
+  "列表select字典查询框": {
+    "prefix": "table_search_select_dict",
+    "body": [
+      "<el-col :xs=\"StyleEnum.COL_XS\" :sm=\"StyleEnum.COL_SM\" :md=\"4\" :lg=\"4\" :xl=\"4\">\r",
+      "  <el-form-item prop='$1bbb'>\r",
+      "    <el-select\r",
+      "      class=\"el-select-block\"\r",
+      "      :size=\"StyleEnum.FORM_SIZE\"\r",
+      "      v-model=\"tableParams.bbb\"\r",
+      "      :placeholder='$$t(\"AAA.bbbPlaceHolder\")'\r",
+      "      filterable\r",
+      "      clearable\r",
+      "    >\r",
+      "       <el-option\r",
+      "         v-for=\"item in getDictByType('aaa')\"\r",
+      "         :key=\"item.dictValue\"\r",
+      "         :label=\"item.dictLabel\"\r",
+      "         :value=\"item.dictValue\"\r",
+      "       ></el-option>\r",
+      "    </el-select>\r",
+      "  </el-form-item>\r",
+      "</el-col>\r",
+      ""
+    ],
+    "description": "列表select字典查询框"
+  }
+}

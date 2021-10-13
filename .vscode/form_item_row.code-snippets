@@ -1,0 +1,7 @@
+{
+  "表单row标签": {
+    "prefix": "form_item_row",
+    "body": ["<el-row :gutter=\"StyleEnum.ROW_GUTTER\"></el-row>\r", ""],
+    "description": "表单row标签"
+  }
+}

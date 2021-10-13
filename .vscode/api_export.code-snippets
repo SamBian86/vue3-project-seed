@@ -1,0 +1,19 @@
+{
+  "api代码片段导出": {
+    "prefix": "api_getExport",
+    "body": [
+      "import { ContentTypeEnum } from '/@/utils/http/axios/AxiosEnum'\r",
+      "export function expor$1(params: any) {\r",
+      "  return request.get({\r",
+      "    url: `$2`,\r",
+      "    responseType: 'blob',\r",
+      "    params\r",
+      "  }, {\r",
+      "    headers: { 'Content-Type': ContentTypeEnum.FORM_URLENCODED }\r",
+      "  })\r",
+      "}\r",
+      ""
+    ],
+    "description": "api代码片段导出"
+  }
+}

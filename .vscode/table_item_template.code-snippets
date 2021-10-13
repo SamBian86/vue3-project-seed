@@ -1,0 +1,14 @@
+{
+  "列表col区域template": {
+    "prefix": "table_item_template",
+    "body": [
+      "<el-table-column prop=\"bbb\" :show-overflow-tooltip=\"true\" :label=\"$$t('AAA.bbb')\">\r",
+      "  <template #default=\"scope\">\r",
+      "$1\r",
+      "  </template>\r",
+      "</el-table-column>\r",
+      ""
+    ],
+    "description": "列表col区域template"
+  }
+}

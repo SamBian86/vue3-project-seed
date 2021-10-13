@@ -1,0 +1,14 @@
+{
+  "api代码片段getById获取数据": {
+    "prefix": "api_getById",
+    "body": [
+      "export function get$1ById({ id }: any) {\r",
+      "  return request.get({\r",
+      "    url: `$2/\\${id}`,\r",
+      "  })\r",
+      "}\r",
+      ""
+    ],
+    "description": "api代码片段getById获取数据"
+  }
+}

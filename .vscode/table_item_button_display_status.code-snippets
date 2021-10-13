@@ -1,0 +1,21 @@
+{
+  "列表col区域button_上下架类似操作": {
+    "prefix": "table_item_button_display_status",
+    "body": [
+      "<el-button\r",
+      "  type=\"text\"\r",
+      "  v-if=\"filterPermission('xxx:xxx:xxx')\"\r",
+      "  :size=\"StyleEnum.BUTTON_SIZE\"\r",
+      "  @click=\"\r",
+      "    displayXXXHandle({ id: scope.row.id, isdisplay: scope.row.bbb === 1 ? 0 : 1 }, () => {\r",
+      "      pgTableQuery(tableParams)\r",
+      "    })\r",
+      "  \"\r",
+      ">\r",
+      "  {{ scope.row.bbb === 1 ? $$t('table.off') : $$t('table.on') }}\r",
+      "</el-button>\r",
+      ""
+    ],
+    "description": "列表col区域button_上下架类似操作"
+  }
+}

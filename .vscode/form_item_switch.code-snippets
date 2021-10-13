@@ -1,0 +1,16 @@
+{
+  "表单switch": {
+    "prefix": "form_item_switch",
+    "body": [
+      "<el-form-item :label=\"$$t('AAA.bbb')\" prop=\"bbb\">\r",
+      "  <el-switch\r",
+      "    v-model=\"formData.bbb\"\r",
+      "    :active-color=\"StyleEnum.FORM_SWITCH_ACTIVE_COLOR\"\r",
+      "    :inactive-color=\"StyleEnum.FORM_SWITCH_INACTIVE_COLOR\"\r",
+      "  ></el-switch>\r",
+      "</el-form-item>\r",
+      ""
+    ],
+    "description": "表单switch"
+  }
+}

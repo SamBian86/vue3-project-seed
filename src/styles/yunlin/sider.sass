@@ -1,0 +1,30 @@
+// LayoutSiderWrapper容器样式
+.yunlin-drawer-wrapper
+  position: relative
+  z-index: 50
+  .el-drawer-fade-enter-active
+    animation: none !important
+
+// sider背景颜色、字体颜色设置
+.yunlin-sider
+  background: #191a23 !important
+  transition: all 0.5s
+  color: rgb(255 255 255 / 70%)
+  .is-active
+    // background: $sider-item-active-background
+  .icon-svg
+    width: 20px
+    height: 20px
+  .el-menu-item
+    .menu-text
+      padding-left: 10px
+  .el-submenu__title
+    .menu-text
+      padding-left: 10px
+.yunlin-sider.yunlin-sider-isclose
+  .el-menu-item
+    .icon-svg
+      width: 20px
+      height: 20px
+    .menu-text
+      display: none !important

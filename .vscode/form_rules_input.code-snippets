@@ -1,0 +1,7 @@
+{
+  "表单校验blur": {
+    "prefix": "form_rules_input",
+    "body": ["bbb: [{ required: true, message: t('AAA.bbb'), trigger: 'blur' }],\r", ""],
+    "description": "表单校验blur"
+  }
+}

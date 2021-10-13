@@ -1,0 +1,15 @@
+{
+  "api代码片段getAll获取所有数据": {
+    "prefix": "api_getAll",
+    "body": [
+      "export function get$1All(params: any) {\r",
+      "  return request.get({\r",
+      "    url: `$2`,\r",
+      "    params\r",
+      "  })\r",
+      "}\r",
+      ""
+    ],
+    "description": "api代码片段getAll获取所有数据"
+  }
+}

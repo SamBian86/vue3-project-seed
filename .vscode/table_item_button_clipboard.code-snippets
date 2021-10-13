@@ -1,0 +1,12 @@
+{
+  "列表col区域button复制文字内容按钮": {
+    "prefix": "table_item_button_clipboard",
+    "body": [
+      "<el-button type=\"text\" :size=\"StyleEnum.BUTTON_SIZE\">\r",
+      "  <span v-clipboard :data-clipboard-text=\"scope.row.bbb\">{{ $$t('table.copy') }}</span>\r",
+      "</el-button>\r",
+      ""
+    ],
+    "description": "列表col区域button复制文字内容按钮"
+  }
+}

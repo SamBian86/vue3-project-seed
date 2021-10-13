@@ -1,0 +1,97 @@
+<template>
+  <el-form
+    ref="ruleForm"
+    :model="formData"
+    :rules="rules"
+    :size="StyleEnum.FORM_SIZE"
+    :label-width="StyleEnum.FORM_LABEL_WIDTH"
+    :disabled="pageType === 'detail'"
+  >
+    <el-row :gutter="StyleEnum.ROW_GUTTER">
+      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="24" :lg="24" :xl="24">
+        <el-form-item :label="$t('PensionDishesintroduction.details')" prop="details">
+          <Tinymce
+            ref="tinymce"
+            :data="formData.details"
+            :height="'600'"
+            :placeholder="$t('PensionDishesintroduction.detailsPlaceHolder')"
+            @content-change-handle="contentChangeHandle"
+          />
+        </el-form-item>
+      </el-col>
+      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="24" :lg="24" :xl="24">
+        <el-form-item v-if="pageType === 'create' || pageType === 'update'">
+          <el-button type="primary" @click="submitHandle" :size="StyleEnum.BUTTON_SIZE">
+            {{ $t('form.submit') }}
+          </el-button>
+        </el-form-item>
+      </el-col>
+    </el-row>
+  </el-form>
+</template>
+<script lang='ts'>
+// 基础支持
+import { defineComponent, ref, watch, unref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { StyleEnum } from '/@/enums/styleEnum'
+import { mapGetters } from 'vuex'
+// components
+import { Tinymce } from '/@/components/Tinymce'
+// hooks
+import useFormPageComponent from '/@/hooks/component/formPage'
+// API封装
+import usePensionDishesintroductionRepository from './usePensionDishesintroductionRepository' // 模板修改标记
+// mixin
+import formMixin from '/@/mixins/formMixin'
+// validate
+// import { validatePhoneHandle } from '/@/utils/validate' // 模板修改标记
+export default defineComponent({
+  name: 'PensionDishesintroductionDetails', // 模板修改标记
+  mixins: [formMixin],
+  components: { Tinymce },
+  computed: {
+    ...mapGetters('dict', ['getDictByType'])
+  },
+  setup(props, { emit }) {
+    const { t } = useI18n()
+    const details = ref({})
+    const { formData, detailsPensionDishesintroductionHandle, getPensionDishesintroductionByIdHandle } =
+      usePensionDishesintroductionRepository() // 模板修改标记
+    const ruleForm = ref(null)
+    const { formPageSubmitHandle } = useFormPageComponent(ruleForm)
+    getPensionDishesintroductionByIdHandle(props.pageParams)
+
+    // 校验
+    const rules = {
+      details: [{ required: true, message: t('PensionDishesintroduction.detailsPlaceHolder'), trigger: 'blur' }] // 模板修改标记
+    }
+
+    function contentChangeHandle(value: any) {
+      details.value = value
+      formData.value.details = value
+    }
+
+    // 提交逻辑
+    function submitHandle() {
+      const cMethod = detailsPensionDishesintroductionHandle // 模板修改标记
+      const cFormData = unref(formData)
+      formPageSubmitHandle(cMethod, { ...props.pageParams, ...cFormData }, () => {
+        emit('before-close')
+      })
+    }
+
+    return {
+      // 基础支持
+      StyleEnum,
+      // 表单数据
+      formData,
+      rules,
+      // 表单引用
+      ruleForm,
+      // 表单中相关项初始化数据
+      submitHandle,
+      contentChangeHandle
+    }
+  }
+})
+</script>

@@ -1,0 +1,12 @@
+{
+  "表单textarea框": {
+    "prefix": "form_item_textarea",
+    "body": [
+      "<el-form-item :label=\"$$t('AAA.bbb')\" prop=\"bbb\">\r",
+      "  <el-input type=\"textarea\" :rows=\"10\" v-model=\"formData.bbb\" :placeholder=\"$$t('AAA.bbb')\" clearable></el-input>\r",
+      "</el-form-item>\r",
+      ""
+    ],
+    "description": "表单textarea框"
+  }
+}

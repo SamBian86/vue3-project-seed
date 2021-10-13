@@ -1,0 +1,21 @@
+{
+  "表单时间选择框el-date-picker,type为date": {
+    "prefix": "form_item_date_picker",
+    "body": [
+      "<el-form-item :label=\"$$t('AAA.bbb')\" prop=\"bbb\">\r",
+      "  <el-date-picker\r",
+      "    :size=\"StyleEnum.FORM_SIZE\"\r",
+      "    v-model=\"formData.bbb\"\r",
+      "    format=\"YYYY-MM-DD\"\r",
+      "    value-format=\"YYYY-MM-DD\"\r",
+      "    :disabledDate=\"disabledDate\"\r",
+      "    type=\"date\"\r",
+      "    :placeholder=\"$$t('AAA.bbbPlaceHolder')\"\r",
+      "    clearable\r",
+      "  />\r",
+      "</el-form-item>\r",
+      ""
+    ],
+    "description": "表单时间选择框el-date-picker,type为date"
+  }
+}

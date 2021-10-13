@@ -1,0 +1,34 @@
+{
+  "表单时间选择框el-date-picker,type为datetimerange": {
+    "prefix": "form_item_date_picker_datetimerange",
+    "body": [
+      "    <el-form-item :label=\"$$t('AAA.bbb')\" prop=\"bbb\">\r",
+      "      <el-date-picker\r",
+      "        :size=\"StyleEnum.FORM_SIZE\"\r",
+      "        v-model=\"formData.bbb\"\r",
+      "        format=\"YYYY-MM-DD HH:mm:ss\"\r",
+      "        value-format=\"YYYY-MM-DD HH:mm:ss\"\r",
+      "        type=\"datetimerange\"\r",
+      "        :placeholder=\"$$t('AAA.bbbPlaceHolder')\"\r",
+      "        @change=\"bbbHandle\"\r",
+      "        clearable\r",
+      "      />\r",
+      "    </el-form-item>\r",
+      "if (bbbFrom && bbbTo) {\r",
+      "  formData.value.bbb = [bbbFrom, bbbTo]\r",
+      "}\r",
+      "// 时间选择\r",
+      "function bbbHandle(value: any) {\r",
+      "  if (value) {\r",
+      "    formData.value.bbbFrom = value[0]\r",
+      "    formData.value.bbbTo = value[1]\r",
+      "  } else {\r",
+      "    formData.value.bbbFrom = ''\r",
+      "    formData.value.bbbTo = ''\r",
+      "  }\r",
+      "}\r",
+      ""
+    ],
+    "description": "表单时间选择框el-date-picker,type为datetimerange"
+  }
+}

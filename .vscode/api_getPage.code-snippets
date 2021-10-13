@@ -1,0 +1,15 @@
+{
+  "api代码片段getPage获取所有数据": {
+    "prefix": "api_getPage",
+    "body": [
+      "export function get$1Page(params: any) {\r",
+      "  return request.get({\r",
+      "    url: `$2`,\r",
+      "    params\r",
+      "  })\r",
+      "}\r",
+      ""
+    ],
+    "description": "api代码片段getPage获取所有数据"
+  }
+}

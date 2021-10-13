@@ -1,0 +1,10 @@
+{
+  "列表item_普通": {
+    "prefix": "table_item",
+    "body": [
+      "<el-table-column prop='$1bbb' :show-overflow-tooltip='true' :label='$$t(\"AAA.bbb\")' width='100'></el-table-column>\r",
+      ""
+    ],
+    "description": "列表button按钮"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "表单自定义select框": {
+    "prefix": "form_item_select_options",
+    "body": [
+      "<el-form-item :label=\"$$t('AAA.bbb')\" prop=\"bbb\">\r",
+      "  <el-select\r",
+      "    class=\"el-select-block\"\r",
+      "    :size=\"StyleEnum.FORM_SIZE\"\r",
+      "    v-model=\"formData.bbb\"\r",
+      "    :placeholder=\"$$t('AAA.bbbPlaceHolder')\"\r",
+      "    filterable\r",
+      "    clearable\r",
+      "  >\r",
+      "    <el-option v-for=\"item in bbbSelectOptions\" :key=\"item.value\" :label=\"item.label\" :value=\"item.value\"></el-option>\r",
+      "  </el-select>\r",
+      "</el-form-item>\r",
+      "const bbbSelectOptions = ref([\r",
+      "  { label: '停用', value: 0 },\r",
+      "  { label: '正常', value: 1 }\r",
+      "])\r",
+      ""
+    ],
+    "description": "表单自定义select框"
+  }
+}

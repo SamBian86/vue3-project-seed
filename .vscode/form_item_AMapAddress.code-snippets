@@ -1,0 +1,28 @@
+{
+  "表单地图组件": {
+    "prefix": "form_item_AMapAddress",
+    "body": [
+      "           <AMapAddress\r",
+      "            :show-text=\"formData.address\"\r",
+      "            :lng=\"formData.lng\"\r",
+      "            :lat=\"formData.lat\"\r",
+      "            :style-text=\"'height: 300px'\"\r",
+      "            :placeholder=\"$$t('AAA.bbbPlaceHolder')\"\r",
+      "            :page-type=\"pageType\"\r",
+      "            :auto-complete-open=\"true\"\r",
+      "            @address-change-handle=\"addressChangeHandle\"\r",
+      "          />\r",
+      "// components\r",
+      "import { AMapAddress } from '/@/components/AMapAddress'\r",
+      "    // 地址变动事件\r",
+      "    function addressChangeHandle(data: { address: any; lng: any; lat: any }) {\r",
+      "      const { address, lng, lat } = data\r",
+      "      formData.value['address'] = address\r",
+      "      formData.value['lng'] = lng\r",
+      "      formData.value['lat'] = lat\r",
+      "    }\r",
+      ""
+    ],
+    "description": "表单地图组件"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "表单col标签": {
+    "prefix": "form_item_col",
+    "body": ["<el-col :xs=\"StyleEnum.COL_XS\" :sm=\"StyleEnum.COL_SM\" :md=\"6\" :lg=\"6\" :xl=\"6\"></el-col>\r", ""],
+    "description": "表单col标签"
+  }
+}

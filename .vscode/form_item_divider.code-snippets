@@ -1,0 +1,7 @@
+{
+  "表单divider分割线": {
+    "prefix": "form_item_divider",
+    "body": ["<el-divider content-position=\"left\">{{ $$t('AAA.bbb') }}</el-divider>\r", ""],
+    "description": "表单divider分割线"
+  }
+}

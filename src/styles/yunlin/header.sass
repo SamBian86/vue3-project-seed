@@ -1,0 +1,122 @@
+// LayoutHeaderWrapper容器样式
+.yunlin-header-wrapper
+  position: relative
+  z-index: 50
+  margin-left: 260px
+  transition: all 0.5s
+  overflow: hidden
+.yunlin-header-wrapper.yunlin-header-wrapper-isclose
+  margin-left: 64px
+.yunlin-header-layout-wrapper
+  z-index: 40
+  width: 100%
+  box-sizing: border-box
+  transition: all 0.5s
+.yunlin-header-layout
+  height: 50px
+  line-height: 50px
+  background: $yunlin-header-layout
+  box-shadow: 0 1px 4px rgb(0 21 41 / 8%)
+  display: flex
+  justify-content: space-between
+  overflow: hidden
+  .yunlin-header-left,.yunlin-header-right
+    display: flex
+    flex-direction: row
+  .yunlin-header-nav-wrapper
+    flex: 1
+    width: 100px
+    padding: 0px 10px
+    .el-tabs__header
+      margin-bottom: 0px
+    .el-tabs__nav-wrap::after
+      display: none
+    .el-tabs__nav-next, .el-tabs__nav-prev
+      line-height: $nav-tabs-next-and-prew-line-height
+    .el-tabs__item
+      color: $nav-tabs-text-color
+      z-index: 10
+      &:hover
+        background: $nav-tabs-item-hover-background
+        color: $nav-tabs-item-hover-text
+      &.is-active
+        color: $nav-tabs-text-active-color
+    .el-tabs__active-bar
+      height: $nav-tabs-active-bar-height
+      background: $nav-tabs-active-bar-background
+  .yunlin-header-right
+    float: right
+    display: flex
+    justify-content: flex-end
+  .yunlin-header-adapter,.yunlin-header-reflash
+    cursor: pointer
+    display: flex
+    flex-direction: column
+    justify-content: center
+    padding: 0px 10px
+    width: 40px
+    min-width: 40px
+    overflow: hidden
+    box-sizing: border-box
+    &:hover
+      background: $icon-hover-bg-color
+    i
+      font-size: 20px
+      color: $icon-nav-color
+  .yunlin-header-role,.yunlin-header-fullscreen,.yunlin-header-user,.yunlin-header-language
+    cursor: pointer
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-self: center
+    overflow: hidden
+    box-sizing: border-box
+    height: 50px
+    line-height: 50px
+    &:hover
+      background: $icon-hover-bg-color
+    i
+      text-align: center
+      font-size: 20px
+      color: $icon-nav-color
+    span
+      font-size: 14px
+      padding: 0 10px
+      color: $icon-nav-color
+  .yunlin-header-role
+    min-width: 100px
+    display: flex
+    align-items: center
+  .yunlin-header-fullscreen
+    min-width: 40px
+    span
+      display: block
+      height: 50px
+      line-height: 55px
+      display: flex
+      align-items: center
+  .yunlin-header-user
+    min-width: 140px
+    .el-dropdown
+      span
+        display: block
+        height: 50px
+        line-height: 50px
+        display: flex
+        align-items: center
+        .user-avatar
+          width: 30px
+          height: 30px
+          border-radius: 15px
+          margin-right: 5px
+  .yunlin-header-language
+    .el-dropdown
+      display: flex
+      span
+        display: flex
+        justify-content: center
+        flex-direction: column
+.el-dropdown-menu
+  .el-dropdown-menu__item.language-is-actived
+    color: #2d8cf0 !important
+    background: #def5fd !important

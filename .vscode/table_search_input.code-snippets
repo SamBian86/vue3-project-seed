@@ -1,0 +1,19 @@
+{
+  "列表input查询框": {
+    "prefix": "table_search_input",
+    "body": [
+      "<el-col :xs=\"StyleEnum.COL_XS\" :sm=\"StyleEnum.COL_SM\" :md=\"4\" :lg=\"4\" :xl=\"4\">\r",
+      "  <el-form-item prop='bbb'>\r",
+      "    <el-input\r",
+      "      :size=\"StyleEnum.INPUT_SIZE\"\r",
+      "      v-model=\"tableParams.bbb\"\r",
+      "      :placeholder='$$t(\"$3AAA.bbb\")'\r",
+      "      clearable\r",
+      "    ></el-input>\r",
+      "  </el-form-item>\r",
+      "</el-col>\r",
+      ""
+    ],
+    "description": "列表input查询框"
+  }
+}

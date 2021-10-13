@@ -1,0 +1,7 @@
+{
+  "表单校验change": {
+    "prefix": "form_rules_change",
+    "body": ["bbb: [{ required: true, message: t('AAA.bbb'), trigger: 'change' }],\r", ""],
+    "description": "表单校验change"
+  }
+}

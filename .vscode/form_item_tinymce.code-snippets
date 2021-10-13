@@ -1,0 +1,23 @@
+{
+  "表单tinymce组件": {
+    "prefix": "form_item_tinymce",
+    "body": [
+      "    <el-form-item :label=\"$$t('AAA.bbb')\" prop=\"bbb\">\r",
+      "      <Tinymce\r",
+      "        ref=\"tinymce\"\r",
+      "        :data=\"formData.bbb\"\r",
+      "        :height=\"'400'\"\r",
+      "        :placeholder=\"$$t('AAA.bbbPlaceHolder')\"\r",
+      "        @content-change-handle=\"contentChangeHandle\"\r",
+      "      />\r",
+      "    </el-form-item>\r",
+      "detailInformation.value = response.detailInformation\r",
+      "function contentChangeHandle(value: any) {\r",
+      "  detailInformation.value = value\r",
+      "  formData.value.detailInformation = value\r",
+      "}\r",
+      ""
+    ],
+    "description": "表单tinymce组件"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "列表查询区域button_上传文件按钮": {
+    "prefix": "table_search_button_UploadFileButton",
+    "body": [
+      "<UploadFileButton ref=\"uploadFileButton\" :upload-api=\"uploadOssFileHandle\" @success-callback=\"uploadSuccessHandle\">\r",
+      "  <el-button type=\"primary\" :size=\"StyleEnum.BUTTON_SIZE\">{{ $$t('AAA.bbb') }}</el-button>\r",
+      "</UploadFileButton>\r",
+      "import { UploadFileButton } from '/@/components/UploadFileButton'\r",
+      ""
+    ],
+    "description": "列表查询区域button_上传文件按钮"
+  }
+}

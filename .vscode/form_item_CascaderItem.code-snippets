@@ -1,0 +1,43 @@
+{
+  "表单行政区块组件": {
+    "prefix": "form_item_CascaderItem",
+    "body": [
+      "          <CascaderItem\r",
+      "            ref=\"cascaderItem\"\r",
+      "            :show-text=\"formData.paddress\"\r",
+      "            :data-method=\"getSysAddressHandle\"\r",
+      "            :lazy=\"true\"\r",
+      "            :disabled=\"pageType === 'detail'\"\r",
+      "            :placeholder=\"$$t('SysDept.paddressPlaceHolder')\"\r",
+      "            @cascader-change-handle=\"cascaderChangeHandle\"\r",
+      "          ></CascaderItem>\r",
+      "// components\r",
+      "import { CascaderItem } from '/@/components/CascaderItem'\r",
+      "\r",
+      "    // 需要在获取数据那里处理paddress\r",
+      "      const { provinceName, cityName, areaName, streetName } = response\r",
+      "      if (provinceName && cityName && areaName && streetName) {\r",
+      "        formData.value['paddress'] = `\\${provinceName} / \\${cityName} / \\${areaName} / \\${streetName}`\r",
+      "      }\r",
+      "    // 行政区块回调处理\r",
+      "    function cascaderChangeHandle(data: { selected: any[]; store: Object }) {\r",
+      "      const { selected, store } = data\r",
+      "      if (selected.length === 4) {\r",
+      "        formData.value['provinceCode'] = selected[0]\r",
+      "        formData.value['cityCode'] = selected[1]\r",
+      "        formData.value['areaCode'] = selected[2]\r",
+      "        formData.value['streetCode'] = selected[3]\r",
+      "        formData.value['paddress'] = `\\${getValue(selected[0])} / \\${getValue(selected[1])} / \\${getValue(selected[2])} / \\${getValue(\r",
+      "          selected[3]\r",
+      "        )}`\r",
+      "      }\r",
+      "\r",
+      "      function getValue(key: any) {\r",
+      "        return store[key] ? store[key] : ''\r",
+      "      }\r",
+      "    }\r",
+      ""
+    ],
+    "description": "表单行政区块组件"
+  }
+}

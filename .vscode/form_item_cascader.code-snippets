@@ -1,0 +1,24 @@
+{
+  "表单cascader": {
+    "prefix": "form_item_cascader",
+    "body": [
+      "<el-form-item :label=\"$$t('AAA.bbb')\" prop=\"bbb\">\r",
+      "  <el-cascader\r",
+      "    :class=\"'form-page-cascader'\"\r",
+      "    v-model=\"formData.bbb\"\r",
+      "    :options=\"getMenuDatas\"\r",
+      "    :props=\"cascaderProps\"\r",
+      "    :placeholder=\"$$t('AAA.bbbPlaceHolder')\"\r",
+      "  ></el-cascader>\r",
+      "</el-form-item>\r",
+      "const cascaderProps = ref({\r",
+      "  label: 'name',\r",
+      "  value: 'id',\r",
+      "  checkStrictly: true,\r",
+      "  emitPath: false\r",
+      "})\r",
+      ""
+    ],
+    "description": "表单cascader"
+  }
+}

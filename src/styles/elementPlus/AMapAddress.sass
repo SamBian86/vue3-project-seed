@@ -1,0 +1,29 @@
+.component-amap-address-wrapper
+  position: relative
+  .component-amap-address-input
+    margin-bottom: 10px
+  .component-amap-address-auto-complete
+    position: absolute
+    top: 32px
+    width: 100%
+    z-index: 60
+    background: #fff
+    border-radius: 4px
+    max-height: 200px
+    overflow-y: auto
+    border: 1px solid #efefef
+    .component-amap-address-auto-item
+      cursor: pointer
+      padding: 0 20px
+      border-bottom: 1px solid #efefef
+      height: 30px
+      line-height: 30px
+      font-size: 14px
+      &:hover
+        background: #ecf5ff
+      &:last-child
+        border-bottom: none
+  .component-amap-address
+    width: 100%
+    position: relative
+    z-index: 50

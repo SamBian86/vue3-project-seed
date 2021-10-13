@@ -1,0 +1,14 @@
+{
+  "表单row_col标签": {
+    "prefix": "form_item_row_col",
+    "body": [
+      "<el-row :gutter=\"StyleEnum.ROW_GUTTER\">\r",
+      "  <el-col :xs=\"StyleEnum.COL_XS\" :sm=\"StyleEnum.COL_SM\" :md=\"6\" :lg=\"6\" :xl=\"6\">\r",
+      "  $1\r",
+      "  </el-col>\r",
+      "</el-row>\r",
+      ""
+    ],
+    "description": "表单row_col标签"
+  }
+}

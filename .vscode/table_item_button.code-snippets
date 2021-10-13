@@ -1,0 +1,29 @@
+{
+  "列表col区域button按钮": {
+    "prefix": "table_item_button",
+    "body": [
+      "<el-table-column :show-overflow-tooltip='true' :label='$t('table.handle')' width='120'>\r",
+      "  <template #default='scope'>\r",
+      "    <el-button\r",
+      "      type='text'\r",
+      "      v-if='filterPermission('xxx:xxx:update')'\r",
+      "      :size='StyleEnum.BUTTON_SIZE'\r",
+      "      @click='updateHandle({ id: scope.row.id })'\r",
+      "    >\r",
+      "      {{ $t('table.update') }}\r",
+      "    </el-button>\r",
+      "    <el-button\r",
+      "      type='text'\r",
+      "      v-if='filterPermission('xxx:xxx:delete')'\r",
+      "      :size='StyleEnum.BUTTON_SIZE'\r",
+      "      @click='deleteHandle({ id: scope.row.id })'\r",
+      "    >\r",
+      "      {{ $t('table.delete') }}\r",
+      "    </el-button>\r",
+      "  </template>\r",
+      "</el-table-column>\r",
+      ""
+    ],
+    "description": "列表col区域button按钮"
+  }
+}

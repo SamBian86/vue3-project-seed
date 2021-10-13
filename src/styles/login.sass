@@ -1,0 +1,105 @@
+.yunlin-login-container
+  height: 100%
+  background: #fff url('/@/assets/login/login_bg.png') no-repeat right center
+  background-size: auto 100%
+  display: flex
+  @media (max-width: $media-xs)
+    background: none
+  @media (min-width: $media-sm) and (max-width: $media-md)
+  @media (min-width: $media-md) and (max-width: $media-lg)
+  @media (min-width: $media-lg) and (max-width: $media-xl)
+.yunlin-login-wrapper
+  width: 750px
+  display: flex
+  background: #fff
+  flex-direction: row
+  justify-content: center
+  align-items: center
+  @media (max-width: $media-xs)
+    width: 100%
+.yunlin-login
+  width: 100%
+.yunlin-slogan
+  background: #fff url('/@/assets/login/login_slogan.png') no-repeat right center
+  background-size: auto 100%
+  width: 558px
+  height: 130px
+  margin: 0 auto
+  @media (max-width: $media-xs)
+    width: 80%
+    background-size: 100% auto
+  @media (min-width: $media-sm) and (max-width: $media-md)
+    width: 80%
+    background-size: 100% auto
+.yunlin-form-wrapper
+  padding-top: 88px
+  width: 558px
+  margin: 0 auto
+  @media (max-width: $media-xs)
+    padding-top: 44px
+    width: 90%
+.yunlin-form
+  width: 460px
+  @media (max-width: $media-xs)
+    width: 90%
+    margin: 0 auto
+  @media (min-width: $media-sm) and (max-width: $media-md)
+    margin: 0 auto
+  .yunlin-input-item
+    height: 70px
+    border-radius: 35px
+    background: #f7f7f7
+    margin-bottom: 35px
+    display: flex
+    justify-content: center
+    align-items: center
+    position: relative
+    // &:last-child
+    //   margin-bottom: none
+    input:-webkit-autofill
+      -webkit-box-shadow: 0 0 0 0 transparent !important
+    input:-webkit-input-placeholder
+      font-size: 20px !important
+    input
+      background: transparent
+      width: 100%
+      padding: 0px 35px
+      border: none
+      height: 70px
+      outline: none
+      font-size: 20px !important
+      color: #303133
+      &[placeholder]
+        color: rgba(0, 0, 0, 0.6)
+    .el-form-item__error
+      left: 50%
+      transform: translateX(-50%)
+      font-size: 14px
+    .yunlin-captcha
+      width: 40%
+      height: 50px
+      position: absolute
+      right: 35px
+      top: 50%
+      transform: translateY(-50%)
+      img
+        width: 100%
+        position: absolute
+        right: 0px
+        top: 50%
+        transform: translateY(-50%)
+        max-height: 50px
+  .yunlin-button-item
+    width: 180px
+    height: 70px
+    line-height: 70px
+    border-radius: 35px
+    font-size: #fff
+    color: #fff
+    text-align: center
+    font-size: 22px
+    cursor: pointer
+    // background: #36a5f8
+    background-image: linear-gradient(to left, #1d96f0, #3ba8f9)
+    @media (max-width: $media-xs)
+      width: 100%
