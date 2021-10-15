@@ -19,8 +19,8 @@
         </el-form-item>
       </el-col>
       <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="24" :lg="24" :xl="24">
-        <el-form-item :label="$t('SysConsult.consultType')" prop="consultType">
-          <el-input v-model="formData.consultType" clearable></el-input>
+        <el-form-item :label="$t('SysConsult.consultTypeName')" prop="consultTypeName">
+          <el-input v-model="formData.consultTypeName" clearable></el-input>
         </el-form-item>
       </el-col>
       <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="24" :lg="24" :xl="24">

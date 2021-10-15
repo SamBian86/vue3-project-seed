@@ -276,7 +276,9 @@ export default defineComponent({
       }
     }
 
-    const rules = ref({})
+    const rules = ref({
+      operationType: [{ required: true, message: t('SysBannerinfo.operationTypePlaceHolder'), trigger: 'blur' }]
+    })
     const rule1 = {
       operationType: [{ required: true, message: t('SysBannerinfo.operationTypePlaceHolder'), trigger: 'blur' }],
       operationId: [{ required: true, message: t('SysBannerinfo.operationId1PlaceHolder'), trigger: 'blur' }],
