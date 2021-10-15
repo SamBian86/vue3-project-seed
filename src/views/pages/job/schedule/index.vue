@@ -188,11 +188,12 @@ import useJobScheduleRepository from './useJobScheduleRepository' // 模板修�
 // mixin
 import tableMixin from '/@/mixins/tableMixin'
 // 页面
+import JobScheduleForm from './form.vue'
 import JobScheduleLog from '../scheduleLog/index.vue'
 export default defineComponent({
   name: 'JobSchedule', // 模板修改标记
   mixins: [tableMixin],
-  components: { PgTable, SkeletonPage, DialogPage, JobScheduleLog }, // 模板修改标记
+  components: { PgTable, SkeletonPage, DialogPage, JobScheduleForm, JobScheduleLog }, // 模板修改标记
   computed: {
     ...mapGetters('permission', ['filterPermission'])
   },

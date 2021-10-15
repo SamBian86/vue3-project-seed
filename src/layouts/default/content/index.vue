@@ -1,6 +1,6 @@
 <template>
   <div class="yunlin-content-wrapper">
-    <Transition name="fade-transform" mode="out-in">
+    <Transition mode="out-in">
       <RouterView v-slot="{ Component, route }">
         <!-- {{ route.meta.action }} -->
         <!-- PensionEpidemicsituationForm 这个页面不使用KeepAlive -->

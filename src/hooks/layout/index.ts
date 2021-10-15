@@ -1,4 +1,5 @@
 import { ProjectEnum } from '/@/enums/projectEnum'
+import { checkDevice } from '/@/utils'
 import { useStore } from "vuex"
 
 export const watchAppWidth = () => {
@@ -9,10 +10,10 @@ export const watchAppWidth = () => {
     const w = document.documentElement.clientWidth
     if (w > ProjectEnum.adapterMaxWidth) {
       store.dispatch("adapter/SET_ISOPEN", true);
-      removeClass()
+
     } else {
       store.dispatch("adapter/SET_ISOPEN", false);
-      addClass()
+
     }
   }
 
@@ -28,9 +29,23 @@ export const watchAppWidth = () => {
     }
   }
 
+  // 检测设备类型
+  function checkDeviceHandle() {
+    const browser = checkDevice()
+    const isMobile = browser.versions.android || browser.versions.iPhone || browser.versions.iPad
+    // console.log(isMobile)
+    if (isMobile) {
+      addClass()
+    } else {
+      removeClass()
+    }
+    store.dispatch("site/SET_ISMOBILE", isMobile)
+  }
+
   window.addEventListener('resize', () => {
     bindResize()
   })
 
+  checkDeviceHandle()
   bindResize()
 }

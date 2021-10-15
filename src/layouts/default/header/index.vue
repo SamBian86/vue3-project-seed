@@ -15,13 +15,13 @@
           <LayoutHeaderNav />
           <LayoutHeaderRight>
             <!-- 租户切换 -->
-            <LayoutHeaderRole />
+            <!-- <LayoutHeaderRole /> -->
             <!-- 全屏 -->
             <LayoutHeaderFullScreen />
             <!-- 当前登录用户信息 -->
             <LayoutHeaderUser />
             <!-- 国际化 -->
-            <LayoutHeaderLanguage />
+            <!-- <LayoutHeaderLanguage /> -->
           </LayoutHeaderRight>
         </div>
         <!-- 头部tabs区域 -->

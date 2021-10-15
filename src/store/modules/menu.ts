@@ -67,6 +67,9 @@ export default {
     },
     getMenuActiveId: (state: any) => {
       return state.activeId
-    }
+    },
+    getMenuActiveIndex: (state: any) => {
+      return state.activeIndex
+    },
   }
 }

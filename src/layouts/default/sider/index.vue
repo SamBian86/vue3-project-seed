@@ -1,5 +1,5 @@
 <template>
-  <div :class="getDrawerWrapperClass">
+  <div :class="[getDrawerWrapperClass, { 'yunlin-drawer-wrapper-isclose': !getIsOpen }]">
     <!-- 抽屉组件部分 -->
     <ElDrawer
       :size="getIsOpen ? getSize : getCloseSize"
@@ -19,17 +19,17 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
-import LayoutLogo from "./LayoutLogo.vue";
-import LayoutSider from "./LayoutSider.vue";
-import { useDrawerSetting } from "/@/hooks/setting/useDrawerSetting";
-import { mapGetters } from "vuex";
+import { defineComponent } from 'vue'
+import LayoutLogo from './LayoutLogo.vue'
+import LayoutSider from './LayoutSider.vue'
+import { useDrawerSetting } from '/@/hooks/setting/useDrawerSetting'
+import { mapGetters } from 'vuex'
 export default defineComponent({
-  name: "LayoutSiderWrapper",
+  name: 'LayoutSiderWrapper',
   components: { LayoutLogo, LayoutSider },
   computed: {
     // 用于判断是否展开
-    ...mapGetters("adapter", ["getIsOpen"]),
+    ...mapGetters('adapter', ['getIsOpen'])
   },
   setup(props, { slots }) {
     const {
@@ -43,8 +43,8 @@ export default defineComponent({
       getWithHeader,
       getDirection,
       getCloseOnClickModal,
-      getCloseOnPressEscape,
-    } = useDrawerSetting();
+      getCloseOnPressEscape
+    } = useDrawerSetting()
 
     return {
       getSize,
@@ -57,8 +57,8 @@ export default defineComponent({
       getWithHeader,
       getDirection,
       getCloseOnClickModal,
-      getCloseOnPressEscape,
-    };
-  },
-});
+      getCloseOnPressEscape
+    }
+  }
+})
 </script>

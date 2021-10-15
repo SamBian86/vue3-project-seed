@@ -44,6 +44,41 @@
     .el-tabs__active-bar
       height: $nav-tabs-active-bar-height
       background: $nav-tabs-active-bar-background
+  .yunlin-header-nav-menu-wrapper
+    // background: $yunlin-header-layout
+    flex: 1
+    .el-menu--horizontal
+      .el-menu-item.is-active
+        color: $nav-tabs-text-active-color
+        border-bottom: 4px solid #409eff
+    .el-menu
+      height: $nav-tabs-next-and-prew-line-height
+      overflow: hidden
+      .el-menu-item
+        height: $nav-tabs-next-and-prew-line-height
+        line-height: $nav-tabs-next-and-prew-line-height
+        // background: $yunlin-header-layout
+        color: #909399 !important
+        padding: 0px 15px
+        &:hover
+          color: #909399 !important
+        &.is-active
+          color: $nav-tabs-text-active-color
+      .el-menu-item-hide
+        display: none
+    .el-menu--horizontal
+      .el-submenu.is-active
+        .el-submenu__title
+          color: #909399
+    .el-submenu
+      height: $nav-tabs-next-and-prew-line-height
+      line-height: $nav-tabs-next-and-prew-line-height
+      .el-submenu__title
+        height: $nav-tabs-next-and-prew-line-height
+        line-height: $nav-tabs-next-and-prew-line-height
+        background: $yunlin-header-layout
+        &:hover
+          color: #909399 !important
   .yunlin-header-right
     float: right
     display: flex
@@ -120,3 +155,16 @@
   .el-dropdown-menu__item.language-is-actived
     color: #2d8cf0 !important
     background: #def5fd !important
+.is-mobile
+  .yunlin-header-layout
+    .yunlin-header-user
+      min-width: auto
+.el-popper
+  .el-menu-item
+    color: #909399 !important
+    &:hover
+      color: #fff !important
+    &.is-active
+      color: $nav-tabs-text-active-color !important
+  .el-menu-item-hide
+    display: none

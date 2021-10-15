@@ -69,7 +69,8 @@ export interface TabsConfig {
 }
 
 export interface siteConfig {
-  token: string
+  token: string,
+  isMobile: boolean
 }
 
 export interface dictConfig {

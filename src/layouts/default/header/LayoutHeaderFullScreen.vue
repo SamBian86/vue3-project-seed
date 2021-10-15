@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="yunlin-header-fullscreen"
-    v-if="getIsOpen"
-    @click="screenFullHandle"
-  >
+  <div class="yunlin-header-fullscreen" v-if="!getIsMobile" @click="screenFullHandle">
     <span>
       <i class="el-icon-full-screen" v-if="!getFullScreenStatus"></i>
       <SvgIcon name="screen-full-close" v-if="getFullScreenStatus" />
@@ -12,31 +8,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { mapGetters } from "vuex";
-import store from "/@/store";
-import screenfull from "screenfull";
-import { SvgIcon } from "/@/components/SvgIcon";
+import { defineComponent } from 'vue'
+import { mapGetters } from 'vuex'
+import store from '/@/store'
+import screenfull from 'screenfull'
+import { SvgIcon } from '/@/components/SvgIcon'
 export default defineComponent({
-  name: "LayoutHeaderFullScreen",
+  name: 'LayoutHeaderFullScreen',
   computed: {
     // 用于判断是否展开
-    ...mapGetters("adapter", ["getIsOpen"]),
+    ...mapGetters('site', ['getIsMobile']),
     // 获取全屏状态
-    ...mapGetters("fullScreen", ["getFullScreenStatus"]),
+    ...mapGetters('fullScreen', ['getFullScreenStatus'])
   },
   components: {
-    SvgIcon,
+    SvgIcon
   },
   methods: {
     screenFullHandle() {
-      const status = this.getFullScreenStatus;
-      store.dispatch("fullScreen/SET_FULLSCREEN", !status);
-      screenfull.toggle();
-    },
+      const status = this.getFullScreenStatus
+      store.dispatch('fullScreen/SET_FULLSCREEN', !status)
+      screenfull.toggle()
+    }
   },
   setup(props, { slots }) {
-    return {};
-  },
-});
+    return {}
+  }
+})
 </script>

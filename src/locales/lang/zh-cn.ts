@@ -20,6 +20,16 @@ export const messages: LocaleMessageObject<VueMessageType> = {
     logout: {
       title: '确定要退出登录?'
     },
+    modify: {
+      pageTitle: '修改密码',
+      newPassword: '新密码',
+      newPasswordPlaceholder: '请输入新密码',
+      password: '原密码',
+      passwordPlaceholder: '请输入原密码',
+    },
+    header: {
+      more: '更多菜单'
+    },
     form: {
       submit: '提交',
       sure: '确定',

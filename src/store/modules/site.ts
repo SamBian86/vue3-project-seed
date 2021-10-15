@@ -16,6 +16,9 @@ export default {
     LOGOUT: (state: { token: any; }, token: any) => {
       state.token = token
     },
+    SET_ISMOBILE: (state: { isMobile: boolean; }, isMobile: boolean) => {
+      state.isMobile = isMobile
+    },
   },
   actions: {
     LOGIN({ commit }: any, state: LoginEntity) {
@@ -45,11 +48,17 @@ export default {
             reject(error)
           })
       })
-    }
+    },
+    SET_ISMOBILE({ commit }: any, state: any) {
+      commit('SET_ISMOBILE', state)
+    },
   },
   getters: {
     getToken: (state: any) => {
       return state.site.token
-    }
+    },
+    getIsMobile: (state: any) => {
+      return state.isMobile
+    },
   }
 }
