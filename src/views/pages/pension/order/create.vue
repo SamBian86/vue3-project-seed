@@ -334,6 +334,12 @@ export default defineComponent({
           }
         })
       }
+      if (value && formData.value.userId) {
+        getAgedLinkaddressDeliveryHandle({
+          userId: formData.value.userId,
+          serverId: value
+        })
+      }
     }
 
     // 远程获取用户手机号
