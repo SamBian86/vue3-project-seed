@@ -13,15 +13,13 @@
           <el-input v-model="formData.name" :placeholder="$t('SysRole.name')" clearable></el-input>
         </el-form-item>
         <el-form-item :label="$t('SysRole.deptId')" prop="deptId">
-          <el-select
-            class="el-select-block"
-            :size="StyleEnum.FORM_SIZE"
+          <el-cascader
+            :class="'form-page-cascader'"
             v-model="formData.deptId"
+            :options="sysDeptTree"
+            :props="cascaderProps"
             :placeholder="$t('SysRole.deptIdPlaceHolder')"
-            clearable
-          >
-            <el-option v-for="item in sysDeptList" :key="item.deptId" :label="item.name" :value="item.deptId"></el-option>
-          </el-select>
+          ></el-cascader>
         </el-form-item>
         <el-form-item :label="$t('SysRole.remark')" prop="remark">
           <el-input type="textarea" :rows="10" v-model="formData.remark" :placeholder="$t('SysRole.remark')" clearable></el-input>
@@ -160,7 +158,8 @@ export default defineComponent({
     })
 
     // 数据权限
-    const { getSysDeptPermissionListTreeHandle } = useSysDeptRepository()
+    const { sysDeptTree, getSysDeptTreeHandle, getSysDeptPermissionListTreeHandle } = useSysDeptRepository()
+    getSysDeptTreeHandle()
     const deptTree = ref(null)
     const deptTreeComponent = useTreeItemComponent(deptTree)
     const defaultDeptProps = ref({
@@ -174,6 +173,13 @@ export default defineComponent({
       name: [{ required: true, message: t('SysRole.namePlaceHolder'), trigger: 'blur' }], // 模板修改标记
       deptId: [{ required: true, message: t('SysRole.deptIdPlaceHolder'), trigger: 'change' }] // 模板修改标记
     }
+
+    const cascaderProps = ref({
+      label: 'label',
+      value: 'id',
+      checkStrictly: true,
+      emitPath: false
+    })
 
     // 提交逻辑
     function submitHandle() {
@@ -202,9 +208,11 @@ export default defineComponent({
       menuTree,
       appMenuTree,
       defaultMenuProps,
+      sysDeptTree,
       getSysMenuPermissionListTreeHandle,
       // 数据权限
       deptTree,
+      cascaderProps,
       defaultDeptProps,
       getSysDeptPermissionListTreeHandle,
       // 表单中相关项初始化数据
