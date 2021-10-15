@@ -83,15 +83,12 @@ export default defineComponent({
       }, 200)
     })
 
-    return {
-      splitIndex
-    }
-  },
-  methods: {
-    // 点击tab
-    menuClickHandle(item: any) {
+    // 点击事件
+    function menuClickHandle(item: any) {
       const { index } = item
-      const items = this.getMenuItems
+      // const items = this.getMenuItems
+      const items = store.getters['menu/getMenuItems']
+
       const id = items[parseInt(index)]['id']
       // el-tabs使用activeId来显示选中的项目
       store.dispatch('menu/SET_MENU_ACTIVEID', id)
@@ -119,6 +116,11 @@ export default defineComponent({
       // }
 
       // 监听 yunlin-header-nav-menu-wrapper 容器长度变化
+    }
+
+    return {
+      splitIndex,
+      menuClickHandle
     }
   }
 })
