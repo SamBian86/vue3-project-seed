@@ -80,7 +80,7 @@ export default defineComponent({
           const menuWidth = menuEl.offsetWidth
           splitIndex.value = getSplitIndexInArray(stepWidth, menuWidth)
         })
-      }, 200)
+      }, 500)
     })
 
     // 点击事件
