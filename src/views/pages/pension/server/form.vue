@@ -356,14 +356,14 @@ export default defineComponent({
     // 提交逻辑
     function submitHandle() {
       const cMethod = pageType.value === 'create' ? createPensionServerHandle : updatePensionServerHandle // 模板修改标记
+      formData.value.serverItemSkuList = serverItemSkuList.value
+      formData.value.discountLinkList = discountLinkList.value
+      formData.value.detailInformation = detailInformation.value
       const cFormData = unref(formData)
       formPageSubmitHandle(
         cMethod,
         {
-          ...cFormData,
-          serverItemSkuList: unref(serverItemSkuList),
-          discountLinkList: unref(discountLinkList),
-          detailInformation: unref(detailInformation)
+          ...cFormData
         },
         () => {
           emit('update-table')

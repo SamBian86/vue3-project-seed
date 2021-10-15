@@ -105,6 +105,7 @@ export const messages: LocaleMessageObject<VueMessageType> = {
       aliUpload: {
         choose: '选择文件',
         titleWarningMessage: '请先输入标题',
+        mp4WarningMessage: '请选择mp4文件!',
         play: '播放视频',
         delete: '删除视频'
       },

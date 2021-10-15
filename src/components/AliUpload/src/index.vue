@@ -159,6 +159,10 @@ export default defineComponent({
     // 触发选择文件
     function fileChangeHandle(e: any) {
       const file = e.target.files[0]
+      if (!/mp4/.test(file.name)) {
+        ElMessage.warning(t('components.aliUpload.mp4WarningMessage'))
+        return false
+      }
       const userData = '{"Vod":{}}'
       fileName.value = file.name
       uploaderObj.value = initAliyunUpload()
