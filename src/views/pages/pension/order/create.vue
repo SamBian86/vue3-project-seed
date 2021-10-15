@@ -186,7 +186,7 @@
   </el-form>
   <DialogPage ref="addUserPage">
     <template #body>
-      <AgedAgedinfoForm :page-type="'create'" />
+      <AgedAgedinfoForm :page-type="'create'" @hide-dialog="hideAddUser" />
     </template>
     <template #title>
       {{ $t('AgedAgedinfo.pageTitle') }}
@@ -194,7 +194,7 @@
   </DialogPage>
   <DialogPage ref="addAddressPage">
     <template #body>
-      <AgedLinkaddressForm :page-type="'create'" />
+      <AgedLinkaddressForm :page-type="'create'" @hide-dialog="hideAddAddress" />
     </template>
     <template #title>
       {{ $t('AgedLinkaddress.pageTitle') }}
@@ -389,9 +389,17 @@ export default defineComponent({
       addUserComponent.showDialog()
     }
 
+    function hideAddUser() {
+      addUserComponent.hideDialog()
+    }
+
     // 服务地址添加
     function handleAddAddress() {
       addAddressComponent.showDialog()
+    }
+
+    function hideAddAddress() {
+      addAddressComponent.hideDialog()
     }
 
     // 提交逻辑
@@ -419,7 +427,9 @@ export default defineComponent({
       categoryChangeHandle,
       serverChangeHandle,
       handleAddUser,
+      hideAddUser,
       handleAddAddress,
+      hideAddAddress,
       disabledDate,
       isCashItems,
       serverItemSkuList,
