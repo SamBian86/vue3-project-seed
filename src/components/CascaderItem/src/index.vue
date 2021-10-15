@@ -2,7 +2,7 @@
   <div class="component-cascader-item-wrapper">
     <div v-if="!show" class="component-cascader-item-input">
       <el-input :size="StyleEnum.FORM_SIZE" v-model="showText" :placeholder="placeholder" readonly>
-        <template #append>
+        <template v-if="!disabled" #append>
           <span class="cascader-show" @click="chooseHandle">重新选择</span>
         </template>
       </el-input>
@@ -90,6 +90,13 @@ export default defineComponent({
       () => props.showText,
       (val) => {
         showText.value = val
+      }
+    )
+
+    watch(
+      () => props.disabled,
+      (val) => {
+        disabled.value = val
       }
     )
 

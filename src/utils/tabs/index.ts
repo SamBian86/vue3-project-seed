@@ -45,7 +45,7 @@ export function reViewWhenRefresh(menus: Array<any>) {
   function findIdMaps(items: Array<any>, id: string) {
     let childrens: any = []
     items.forEach(item => {
-      if (item['childrenIds'].includes(id)) {
+      if (item['childrenIds'] && item['childrenIds'].includes(id)) {
         childrens = item['children']
       }
     })
@@ -59,7 +59,7 @@ export function getNavIdByTabId(id: any) {
   let menuActiveId = ""
   let menuActiveIndex = 0
   menus.forEach((item: any, index: any) => {
-    if (item['childrenIds'].includes(id)) {
+    if (item['childrenIds'] && item['childrenIds'].includes(id)) {
       menuActiveId = item['id']
       menuActiveIndex = index
     }

@@ -36,7 +36,7 @@
             clearable
           >
             <el-option
-              v-for="item in getDictByType('sex')"
+              v-for="item in getDictByType('sex', 'number')"
               :key="item.dictValue"
               :label="item.dictLabel"
               :value="item.dictValue"
@@ -180,8 +180,8 @@
           <el-date-picker
             :size="StyleEnum.FORM_SIZE"
             v-model="formData.birthday"
-            format="yyyy-MM-dd"
-            value-format="yyyy-MM-dd"
+            format="YYYY-MM-DD"
+            value-format="YYYY-MM-DD"
             type="date"
             :placeholder="$t('PensionEmployee.birthdayPlaceHolder')"
             clearable
