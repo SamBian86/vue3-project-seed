@@ -7,7 +7,7 @@
             {{ $t('table.create') }}
             <i class="el-icon-document-add"></i>
           </el-button>
-          <el-button type="primary" :size="StyleEnum.BUTTON_SIZE" @click="treeTableRefresh">
+          <el-button type="primary" :size="StyleEnum.BUTTON_SIZE" @click="treeTableRefreshHandle">
             {{ $t('table.refresh') }}
             <i class="el-icon-refresh"></i>
           </el-button>
@@ -65,7 +65,7 @@
             :page-params="formPageParams"
             @show-skeleton="showSkeleton"
             @hide-skeleton="hideSkeleton"
-            @update-table="treeTableRefresh"
+            @update-table="treeTableRefreshHandle"
           />
         </template>
       </SkeletonPage>
@@ -77,6 +77,8 @@
 import { defineComponent, ref, reactive } from 'vue'
 import { mapGetters } from 'vuex'
 import { StyleEnum } from '/@/enums/styleEnum'
+import { useStore } from 'vuex'
+import { getNavByMenuData } from '/@/utils/layout'
 // components
 import { TreeTable } from '/@/components/TreeTable'
 import { SkeletonPage } from '/@/components/SkeletonPage'
@@ -102,6 +104,7 @@ export default defineComponent({
     ...mapGetters('permission', ['filterPermission'])
   },
   setup(props) {
+    const store = useStore()
     // treeTable相关代码开始
     const treeTable = ref(null)
     const { treeTableRefresh } = useTreeTableComponent(treeTable)
@@ -135,8 +138,24 @@ export default defineComponent({
     function deleteHandle(params: any) {
       deleteSysMenuByIdHandle(params, () => {
         // 模板修改标记
-        treeTableRefresh()
+        treeTableRefreshHandle()
         showSkeleton()
+      })
+    }
+
+    // 刷新
+    function treeTableRefreshHandle() {
+      treeTableRefresh()
+      updateMenuDatas()
+    }
+
+    // update menu
+    function updateMenuDatas() {
+      store.dispatch('menu/SET_MENU_DATAS').then((response) => {
+        const navItems: any = getNavByMenuData(response)
+        // 对原始菜单数据进行处理用于后续的一些逻辑
+        store.dispatch('menu/SET_MENU_ITEMS', navItems)
+        // console.log(navItems);
       })
     }
 
@@ -145,7 +164,6 @@ export default defineComponent({
       StyleEnum,
       // treeTable组件相关
       treeTable,
-      treeTableRefresh,
       // 查询条件
       tableParams,
       // skeletonPage组件
@@ -160,7 +178,8 @@ export default defineComponent({
       // 当前页面提供的方法
       createHandle,
       updateHandle,
-      deleteHandle
+      deleteHandle,
+      treeTableRefreshHandle
     }
   }
 })

@@ -50,7 +50,7 @@
         </el-form-item>
       </el-col>
     </el-row>
-    <el-row :gutter="StyleEnum.ROW_GUTTER" v-if="houseExchangeInfo.dataFrom !== '1'">
+    <el-row :gutter="StyleEnum.ROW_GUTTER" v-if="houseExchangeInfo.publishStatus !== '1'">
       <el-divider content-position="left">{{ $t('HouseExchangeinfo.houseExchangeInfoPublishTitle') }}</el-divider>
       <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="12" :lg="12" :xl="12">
         <el-form-item :label="$t('HouseExchangeinfo.publisherName')" prop="publisherName">

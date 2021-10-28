@@ -11,15 +11,13 @@
       <el-input v-model="formData.username" :placeholder="$t('SysUser.usernamePlaceHolder')" clearable></el-input>
     </el-form-item>
     <el-form-item :label="$t('SysUser.deptId')" prop="deptId">
-      <el-select
-        class="el-select-block"
-        :size="StyleEnum.FORM_SIZE"
+      <el-cascader
+        :class="'form-page-cascader'"
         v-model="formData.deptId"
+        :options="sysDeptTree"
+        :props="cascaderProps"
         :placeholder="$t('SysUser.deptIdPlaceHolder')"
-        clearable
-      >
-        <el-option v-for="item in sysDeptList" :key="item.deptId" :label="item.name" :value="item.deptId"></el-option>
-      </el-select>
+      ></el-cascader>
     </el-form-item>
     <el-form-item :label="$t('SysUser.email')" prop="email">
       <el-input v-model="formData.email" :placeholder="$t('SysUser.emailPlaceHolder')" clearable></el-input>
@@ -145,8 +143,8 @@ export default defineComponent({
     })
 
     // 以下是页面逻辑---------------------------------------------------------------
-    const { sysDeptList, getSysDeptListHandle } = useSysDeptRepository()
-    getSysDeptListHandle()
+    const { sysDeptTree, getSysDeptTreeHandle } = useSysDeptRepository()
+    getSysDeptTreeHandle()
     const { sysRoleList, getSysRoleListHandle } = useSysRoleRepository()
     getSysRoleListHandle()
 
@@ -182,6 +180,13 @@ export default defineComponent({
       status: [{ required: true, message: t('SysUser.statusPlaceHolder'), trigger: 'change' }] // 模板修改标记
     }
 
+    const cascaderProps = ref({
+      label: 'label',
+      value: 'id',
+      checkStrictly: true,
+      emitPath: false
+    })
+
     // 提交逻辑
     function submitHandle() {
       const cMethod = pageType.value === 'create' ? createSysUserHandle : updateSysUserHandle // 模板修改标记
@@ -205,7 +210,8 @@ export default defineComponent({
       statusRadioItems,
       superAdminRadioItems,
       // 表单中相关项初始化数据
-      sysDeptList,
+      cascaderProps,
+      sysDeptTree,
       sysRoleList,
       submitHandle
     }

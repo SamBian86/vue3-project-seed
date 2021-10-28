@@ -187,6 +187,9 @@ export default defineComponent({
         if (!!serverAreaId) {
           tableParams.serverAreaId = serverAreaId
           pgTableQuery(tableParams)
+        } else {
+          tableParams.serverAreaId = ''
+          pgTableQuery(tableParams)
         }
       }
     )

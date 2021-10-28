@@ -157,7 +157,10 @@
             <template #default="scope">
               <el-button
                 type="text"
-                v-if="filterPermission('house:exchangeinfo:view')"
+                v-if="
+                  filterPermission('house:exchangeinfo:view') &&
+                  (scope.row.publishStatus === '1' || scope.row.publishStatus === '2' || scope.row.publishStatus === '3')
+                "
                 :size="StyleEnum.BUTTON_SIZE"
                 @click="detailHandle(scope.row)"
               >
@@ -165,11 +168,22 @@
               </el-button>
               <el-button
                 type="text"
-                v-if="filterPermission('house:exchangeinfo:update')"
+                v-if="
+                  filterPermission('house:exchangeinfo:update') &&
+                  (scope.row.publishStatus === '2' || scope.row.publishStatus === '3')
+                "
                 :size="StyleEnum.BUTTON_SIZE"
                 @click="openHandle('update', scope.row)"
               >
                 {{ $t('table.update') }}
+              </el-button>
+              <el-button
+                type="text"
+                v-if="filterPermission('house:exchangeinfo:publish') && scope.row.publishStatus === '1'"
+                :size="StyleEnum.BUTTON_SIZE"
+                @click="openHandle('publish', scope.row)"
+              >
+                {{ $t('table.publish') }}
               </el-button>
               <el-button
                 type="text"
@@ -300,6 +314,9 @@ export default defineComponent({
         if (type === 'update') {
           updateHandle({ ...item, t: new Date().getTime() })
         }
+        if (type === 'publish') {
+          publishHandle({ ...item, t: new Date().getTime() })
+        }
       }, StyleEnum.OPEN_DIALOG_TIME)
     }
 
@@ -315,6 +332,16 @@ export default defineComponent({
     function updateHandle(params: any) {
       hideSkeleton()
       formPageUpdateHandle(params)
+    }
+    // 发布
+    function publishHandle(params: any) {
+      hideSkeleton()
+      formPagePublishHandle(params)
+    }
+    // 发布
+    function formPagePublishHandle(params: any) {
+      formPageType.value = 'publish'
+      formPageParams.value = params
     }
     // 删除
     function deleteHandle(params: any) {

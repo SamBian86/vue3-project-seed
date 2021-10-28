@@ -129,7 +129,12 @@
           </el-row>
         </template>
         <template v-slot:content>
-          <el-table-column prop="orderNo" :show-overflow-tooltip="true" :label="$t('PensionOrder.orderNo')"></el-table-column>
+          <el-table-column
+            prop="orderNo"
+            :show-overflow-tooltip="true"
+            :label="$t('PensionOrder.orderNo')"
+            width="210"
+          ></el-table-column>
           <el-table-column
             prop="orderStatusName"
             :show-overflow-tooltip="true"
@@ -140,7 +145,7 @@
             prop="orderUserName"
             :show-overflow-tooltip="true"
             :label="$t('PensionOrder.orderUserName')"
-            width="100"
+            width="140"
           ></el-table-column>
           <el-table-column
             prop="userPhoneNumber"
@@ -296,7 +301,7 @@
           <PensionOrderCreate
             :page-type="formPageType"
             :page-params="formPageParams"
-            @hide-dialog="hideDialog"
+            @hide-dialog="dialogPageCreateHideDialog"
             @update-table="pgTableQuery"
           />
         </template>
@@ -311,7 +316,7 @@
       <PensionEmployeeDispatch
         :page-type="dialogPageDispatchType"
         :page-params="dialogPageDispatchParams"
-        @hide-skeleton="dialogPageDispatchHide"
+        @hide-dialog="dialogPageDispatchHide"
         @update-table="pgTableQuery"
       ></PensionEmployeeDispatch>
     </template>
@@ -410,6 +415,9 @@ export default defineComponent({
       formPageCreateHandle()
       dialogPageCreateComponent.showDialog()
     }
+    function dialogPageCreateHideDialog() {
+      dialogPageCreateComponent.hideDialog()
+    }
     // 修改
     function updateHandle(params: any) {
       hideSkeleton()
@@ -496,6 +504,7 @@ export default defineComponent({
       dispatchHandle,
       verificationHandle,
       cancelHandle,
+      dialogPageCreateHideDialog,
       dialogPageDispatch,
       dialogPageDispatchParams,
       dialogPageDispatchType,

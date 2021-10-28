@@ -281,7 +281,7 @@ export default defineComponent({
     // 房屋列表
     function familyListHandle(row: any) {
       routerPush('/pension/family', (path: any) => {
-        router.push({ path, query: { buildingId: row.id, communityName: row.communityName } })
+        router.push({ path, query: { buildingId: row.id, communityCode: row.communityCode } })
       })
     }
 

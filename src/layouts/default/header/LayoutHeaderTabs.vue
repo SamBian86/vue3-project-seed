@@ -69,8 +69,10 @@ export default defineComponent({
       store.dispatch('sider/SET_SIDER_DEFAULTACTIVE', id)
       // 设置nav高亮
       const { menuActiveId, menuActiveIndex } = getNavIdByTabId(id)
-      store.dispatch('menu/SET_MENU_ACTIVEID', menuActiveId)
-      store.dispatch('menu/SET_MENU_ACTIVEINDEX', menuActiveIndex)
+      if (menuActiveId !== '') {
+        store.dispatch('menu/SET_MENU_ACTIVEID', menuActiveId)
+        store.dispatch('menu/SET_MENU_ACTIVEINDEX', menuActiveIndex)
+      }
 
       // 设置siderItems
       const siderItems = getSiderItemsByTabId(id)

@@ -56,6 +56,7 @@
             v-model="formData.skuId"
             :placeholder="$t('PensionOrder.skuIdPlaceHolder')"
             clearable
+            @change="skuHandle"
           >
             <el-option
               v-for="(item, idx) in serverItemSkuList"
@@ -126,12 +127,16 @@
             <el-option
               v-for="item in agedLinkaddressDelivery"
               :disabled="!item.inRange"
-              :key="item.familyId"
+              :key="item.addressId"
               :label="item.address"
               :value="item.addressId"
             >
-              <div>{{ item.address }}</div>
-              <div style="color: #8492a6; font-size: 13px">{{ item.name }}&nbsp;&nbsp;&nbsp;&nbsp;{{ item.mobile }}</div>
+              <div>
+                {{ item.address }}
+                <span style="float: right; color: #8492a6; font-size: 13px">
+                  {{ item.name }}&nbsp;&nbsp;&nbsp;&nbsp;{{ item.mobile }}
+                </span>
+              </div>
             </el-option>
           </el-select>
           <el-button type="text" :size="StyleEnum.FORM_SIZE" @click="handleAddAddress">{{ $t('PensionOrder.add') }}</el-button>
@@ -159,7 +164,7 @@
       <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="12" :lg="12" :xl="12">
         <el-form-item :label="$t('PensionOrder.totalPrice')" prop="totalPrice">
           <el-input
-            :value="Math.floor(formData.orderUnitNum * formData.price * formData.discount * 100) / 100 || 0"
+            :value="Math.floor(formData.orderUnitNum * formData.skuPrice * formData.discount * 100) / 100 || 0"
             readonly
           ></el-input>
         </el-form-item>
@@ -395,7 +400,12 @@ export default defineComponent({
       addUserComponent.showDialog()
     }
 
-    function hideAddUser() {
+    function hideAddUser(response: any) {
+      sysFrontUserPhonelist.value.push({
+        userId: response.userId,
+        mobile: response.phoneNumber,
+        name: response.name
+      })
       addUserComponent.hideDialog()
     }
 
@@ -404,8 +414,26 @@ export default defineComponent({
       addAddressComponent.showDialog()
     }
 
-    function hideAddAddress() {
+    function hideAddAddress(response: any) {
+      agedLinkaddressDelivery.value.push({
+        address: response.address,
+        addressId: response.id,
+        mobile: response.mobile,
+        name: response.name
+      })
       addAddressComponent.hideDialog()
+    }
+
+    // skuHandle
+    function skuHandle(value: any) {
+      if (serverItemSkuList.value.length !== 0) {
+        const item = serverItemSkuList.value.filter((i) => {
+          return i.id === value
+        })
+        if (item.length !== 0) {
+          formData.value.skuPrice = item[0].price
+        }
+      }
     }
 
     // 提交逻辑
@@ -448,7 +476,8 @@ export default defineComponent({
       userListLoading,
       agedLinkaddressDelivery,
       addUserPage,
-      addAddressPage
+      addAddressPage,
+      skuHandle
     }
   }
 })

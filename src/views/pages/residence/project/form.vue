@@ -278,9 +278,8 @@ export default defineComponent({
         }
         if (type === 'update' || type === 'detail') {
           getResidenceProjectByIdHandle(params, hideSkeleton).then((response) => {
-            const { houseProjectOsslinkEntityList } = response
-            if (houseProjectOsslinkEntityList) {
-              images.value = houseProjectOsslinkEntityList
+            if (response.houseProjectOsslinkEntityList.length) {
+              images.value = response.houseProjectOsslinkEntityList
             } else {
               images.value = []
             }

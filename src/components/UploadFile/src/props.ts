@@ -28,6 +28,10 @@ const props = {
   styleText: {
     type: String,
     default: ""
+  },
+  acceptFile: {
+    type: String,
+    default: "image"
   }
 }
 

@@ -174,6 +174,28 @@
                     </el-select>
                   </template>
                 </el-table-column>
+                <el-table-column prop="discountId" :label="$t('PensionServer.discountId')">
+                  <template #default="scope">
+                    <el-select
+                      class="el-select-block"
+                      :size="StyleEnum.FORM_SIZE"
+                      v-model="scope.row.discountId"
+                      :placeholder="$t('PensionServer.discountIdPlaceHolder')"
+                      clearable
+                    >
+                      <el-option
+                        v-for="item in pensionServerdiscountdetailListAll"
+                        :key="item.id"
+                        :label="item.scalePrice"
+                        :value="item.id"
+                      >
+                        <span style="float: left">{{ item.scalePrice }}</span>
+                        <span style="float: right; color: #8492a6; font-size: 13px">{{ item.description }}</span>
+                      </el-option>
+                    </el-select>
+                  </template>
+                </el-table-column>
+
                 <el-table-column :label="$t('table.handle')" width="60">
                   <template #default="scope">
                     <el-button type="text" :size="StyleEnum.BUTTON_SIZE" @click="deleteDiscountHandle(scope.$index)">
@@ -291,7 +313,9 @@ export default defineComponent({
 
     // 以下是页面逻辑---------------------------------------------------------------
     // 默认值
-    function defaultConfigHandle() {}
+    function defaultConfigHandle() {
+      formData.value.display = 1
+    }
 
     // 相关页面基础数据
     // 模板修改标记
@@ -340,7 +364,7 @@ export default defineComponent({
     // 新增折扣
     function addDiscountLinkHandle() {
       const item = {
-        roleId: null,
+        tagId: null,
         serverId: formData.value.serverId ? formData.value.serverId : '',
         discountId: '',
         discountDescription: '尚未选择'

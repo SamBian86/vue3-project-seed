@@ -83,7 +83,7 @@
             clearable
           >
             <el-option
-              v-for="item in getDictByType('residentrelationship')"
+              v-for="item in getDictByType('residentrelationship', 'number')"
               :key="item.dictValue"
               :label="item.dictLabel"
               :value="item.dictValue"

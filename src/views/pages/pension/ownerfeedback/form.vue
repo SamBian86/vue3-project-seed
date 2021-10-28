@@ -78,6 +78,7 @@
             :style-text="'width: 200px'"
             :items="oss"
             :disabled="pageType === 'detail'"
+            :accept-file="'imageAndVideo'"
             @success-callback="uploadSuccessHandle"
           ></UploadFile>
         </el-form-item>

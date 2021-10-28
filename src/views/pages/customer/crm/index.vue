@@ -10,7 +10,17 @@
                   <el-input
                     :size="StyleEnum.INPUT_SIZE"
                     v-model="tableParams.name"
-                    :placeholder="$t('PensionEmployee.namePlaceHolder')"
+                    :placeholder="$t('CustomerCrm.namePlaceHolder')"
+                    clearable
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="4" :lg="4" :xl="4">
+                <el-form-item prop="phone">
+                  <el-input
+                    :size="StyleEnum.INPUT_SIZE"
+                    v-model="tableParams.phone"
+                    :placeholder="$t('CustomerCrm.phonePlaceHolder')"
                     clearable
                   ></el-input>
                 </el-form-item>
@@ -23,7 +33,7 @@
             <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="24" :lg="24" :xl="24">
               <el-button
                 type="primary"
-                v-if="filterPermission('pension:order:view')"
+                v-if="filterPermission('customer:crm:view')"
                 :size="StyleEnum.BUTTON_SIZE"
                 @click="pgTableQuery(tableParams)"
               >
@@ -39,47 +49,74 @@
           <el-table-column
             prop="name"
             :show-overflow-tooltip="true"
-            :label="$t('PensionEmployee.name')"
-            width="100"
+            :label="$t('CustomerCrm.name')"
+            width="140"
           ></el-table-column>
           <el-table-column
-            prop="phoneNumber"
+            prop="phone"
             :show-overflow-tooltip="true"
-            :label="$t('PensionEmployee.phoneNumber')"
+            :label="$t('CustomerCrm.phone')"
+            width="160"
           ></el-table-column>
           <el-table-column
-            prop="workStatusName"
+            prop="idCard"
             :show-overflow-tooltip="true"
-            :label="$t('PensionEmployee.workStatusName')"
-            width="100"
+            :label="$t('CustomerCrm.idCard')"
+            min-width="200"
+          ></el-table-column>
+          <el-table-column prop="age" :show-overflow-tooltip="true" :label="$t('CustomerCrm.age')" width="80"></el-table-column>
+          <el-table-column prop="sex" :show-overflow-tooltip="true" :label="$t('CustomerCrm.sex')" width="80"></el-table-column>
+          <el-table-column
+            prop="profession"
+            :show-overflow-tooltip="true"
+            :label="$t('CustomerCrm.profession')"
+            width="120"
           ></el-table-column>
           <el-table-column
-            prop="orderCount"
+            prop="workArea"
             :show-overflow-tooltip="true"
-            :label="$t('PensionEmployee.orderCount')"
-            width="100"
+            :label="$t('CustomerCrm.workArea')"
+            min-width="140"
+          ></el-table-column>
+          <el-table-column
+            prop="workAddress"
+            :show-overflow-tooltip="true"
+            :label="$t('CustomerCrm.workAddress')"
+            min-width="120"
+          ></el-table-column>
+          <el-table-column
+            prop="liveArea"
+            :show-overflow-tooltip="true"
+            :label="$t('CustomerCrm.liveArea')"
+            min-width="140"
+          ></el-table-column>
+          <el-table-column
+            prop="liveAddress"
+            :show-overflow-tooltip="true"
+            :label="$t('CustomerCrm.liveAddress')"
+            min-width="120"
           ></el-table-column>
 
-          <el-table-column :show-overflow-tooltip="true" :label="$t('table.handle')" width="100">
-            <template #default="scope">
+          <!-- <el-table-column :show-overflow-tooltip="true" :label="$t('table.handle')" width="60">
+            <template #default="scope"> -->
+          <!-- <el-button
+                type="text"
+                v-if="filterPermission('customer:crm:update')"
+                :size="StyleEnum.BUTTON_SIZE"
+                @click="updateHandle({ id: scope.row.id })"
+              >
+                {{ $t('table.update') }}
+              </el-button>
               <el-button
                 type="text"
-                v-if="filterPermission('pension:order:allocate:update')"
-                :size="StyleEnum.BUTTON_SIZE"
-                @click="allocateHandle(scope.row)"
-              >
-                {{ $t('PensionEmployee.allocate') }}
-              </el-button>
-              <!-- <el-button
-                type="text"
-                v-if="filterPermission('PensionEmployee:PensionEmployee:delete')"
+                v-if="filterPermission('customer:crm:delete')"
                 :size="StyleEnum.BUTTON_SIZE"
                 @click="deleteHandle([scope.row.id])"
               >
                 {{ $t('table.delete') }}
               </el-button> -->
-            </template>
-          </el-table-column>
+          <!-- </template>
+          </el-table-column> -->
         </template>
       </PgTable>
     </el-col>
@@ -90,38 +127,36 @@
 import { defineComponent, ref, reactive } from 'vue'
 import { mapGetters } from 'vuex'
 import { StyleEnum } from '/@/enums/styleEnum'
-import { ElMessage } from 'element-plus'
-import { useI18n } from 'vue-i18n'
 // components
 import { PgTable } from '/@/components/PgTable'
 // hooks
 import usePgTableComponent from '/@/hooks/component/pgTable'
 import useFormPageComponent from '/@/hooks/component/formPage'
 // API封装
-import usePensionEmployeeRepository from '/@/views/pages/pension/employee/usePensionEmployeeRepository'
-import usePensionOrderRepository from '/@/views/pages/pension/order/usePensionOrderRepository'
+import useCustomerCrmRepository from './useCustomerCrmRepository' // 模板修改标记
 // mixin
 import tableMixin from '/@/mixins/tableMixin'
 // 页面
 
 export default defineComponent({
-  name: 'PensionEmployeeDispatch', // 模板修改标记
+  name: 'CustomerCrm', // 模板修改标记
   mixins: [tableMixin],
   components: { PgTable }, // 模板修改标记
   computed: {
-    ...mapGetters('permission', ['filterPermission'])
+    ...mapGetters('permission', ['filterPermission']),
+    ...mapGetters('dict', ['getDictByType', 'getDictNameByValue'])
   },
-  setup(props, { emit }) {
+  setup(props) {
     // 约定，在页面直接使用的方法都以Handle结尾，子组件中的方法不以Handle作为结尾
-    const { t } = useI18n()
+
     // pgTable相关代码
     const pgTable = ref(null)
     const { pgTableQuery, pgTableReset } = usePgTableComponent(pgTable)
+
     // 查询条件
     const searchForm = ref(null)
     const tableParams = reactive({
       // 模板修改标记
-      orderId: props.pageParams.orderId
     })
 
     // 重置方法
@@ -131,8 +166,7 @@ export default defineComponent({
     }
 
     // API相关
-    const { getPageHandle } = usePensionEmployeeRepository() // 模板修改标记
-    const { dispatchPensionOrderHandle } = usePensionOrderRepository()
+    const { getPageHandle } = useCustomerCrmRepository() // 模板修改标记
 
     // formPage相关代码开始
     const formPage = ref(null)
@@ -141,18 +175,6 @@ export default defineComponent({
     // 查询框初始化数据相关代码
     // 模板修改标记 是否有初始化数据
     // formPage相关代码开始
-
-    // 分配任务
-    function allocateHandle(row: any) {
-      dispatchPensionOrderHandle({
-        id: props.pageParams.orderId,
-        staffId: row.userId
-      }).then(() => {
-        ElMessage.success(t('PensionOrder.allocateSuccess'))
-        emit('update-table')
-        emit('hide-dialog')
-      })
-    }
 
     return {
       // 基础支持
@@ -166,8 +188,7 @@ export default defineComponent({
       pgTableResetHandle,
       // 查询相关基础数据及方法
       // API
-      getPageHandle, // 模板修改标记 获取分页数据
-      allocateHandle
+      getPageHandle // 模板修改标记 获取分页数据
     }
   }
 })

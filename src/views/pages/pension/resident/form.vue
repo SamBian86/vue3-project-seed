@@ -83,7 +83,7 @@
             clearable
           >
             <el-option
-              v-for="item in getDictByType('residentrelationship')"
+              v-for="item in getDictByType('residentrelationship', 'number')"
               :key="item.dictValue"
               :label="item.dictLabel"
               :value="item.dictValue"
@@ -130,7 +130,7 @@
           <el-select
             class="el-select-block"
             :size="StyleEnum.FORM_SIZE"
-            v-model="formData.bbb"
+            v-model="formData.married"
             :placeholder="$t('PensionResident.marriedPlaceHolder')"
             filterable
             clearable
@@ -284,7 +284,7 @@ export default defineComponent({
       formData.value.buildingId = pageParams.value.buildingId
       formData.value.familyId = pageParams.value.familyId
       if (pageType.value === 'update') {
-        getPensionResidentByIdHandle(unref(pageParams)).then((response: any) => {
+        getPensionResidentByIdHandle(unref(pageParams), hideSkeleton).then((response: any) => {
           const { headPhoto } = response
           if (headPhoto) {
             images.value = [{ url: headPhoto }]
@@ -292,6 +292,9 @@ export default defineComponent({
             images.value = []
           }
         }) // 模板修改标记
+      }
+      if (pageType.value === 'create') {
+        hideSkeleton()
       }
     }
 

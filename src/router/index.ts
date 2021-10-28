@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
       next()
     } else if (to.path === '/' && from.path === '/') {
       next({ path: `/home` })
-    } else if (to.path !== '/404' && from.path === '/') {
+    } else if ((to.path !== '/404' && from.path === '/') || (to.path === '/home' && from.path === '/login')) {
       // 强制刷新逻辑
       // 获取菜单
       if (store.state.route.flatData && store.state.route.flatData.length === 0) {

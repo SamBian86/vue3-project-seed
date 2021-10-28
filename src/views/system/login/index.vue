@@ -5,7 +5,7 @@
         <div class="yunlin-slogan"></div>
         <div class="yunlin-form-wrapper">
           <div class="yunlin-form">
-            <el-form ref="form" :model="state" :rules="rules">
+            <el-form ref="form" :model="state" :rules="rules" @keydown.enter.native="loginHandle">
               <!-- <div class="yunlin-input-item">
                 <input
                   type="text"
@@ -14,10 +14,7 @@
                 />
               </div> -->
               <el-form-item class="yunlin-input-item" prop="username">
-                <el-input
-                  v-model="state.username"
-                  :placeholder="$t('login.usernamePlaceholder')"
-                ></el-input>
+                <el-input v-model="state.username" :placeholder="$t('login.usernamePlaceholder')"></el-input>
               </el-form-item>
               <!-- <div class="yunlin-input-item">
                 <input
@@ -27,11 +24,7 @@
                 />
               </div> -->
               <el-form-item class="yunlin-input-item" prop="password">
-                <el-input
-                  type="password"
-                  v-model="state.password"
-                  :placeholder="$t('login.passwordPlaceholder')"
-                ></el-input>
+                <el-input type="password" v-model="state.password" :placeholder="$t('login.passwordPlaceholder')"></el-input>
               </el-form-item>
               <!-- <div class="yunlin-input-item">
                 <input
@@ -48,20 +41,13 @@
                 </div>
               </div> -->
               <el-form-item class="yunlin-input-item" prop="captcha">
-                <el-input
-                  v-model="state.captcha"
-                  :placeholder="$t('login.captchaPlaceholder')"
-                ></el-input>
+                <el-input v-model="state.captcha" :placeholder="$t('login.captchaPlaceholder')"></el-input>
                 <div class="yunlin-captcha">
-                  <img
-                    :src="captchaUrl"
-                    :alt="$t('login.captcha')"
-                    @click="getCaptchaHandle"
-                  />
+                  <img :src="captchaUrl" :alt="$t('login.captcha')" @click="getCaptchaHandle" />
                 </div>
               </el-form-item>
               <div class="yunlin-button-item" @click="loginHandle">
-                {{ $t("login.login") }}
+                {{ $t('login.login') }}
               </div>
             </el-form>
           </div>
@@ -71,51 +57,52 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed, ref, reactive, toRef } from "vue";
-import { useI18n } from "vue-i18n";
-import { getCaptcha, buildUUID } from "/@/utils";
-import { useStore, mapMutations } from "vuex";
+import { defineComponent, computed, ref, reactive, toRef } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { getCaptcha, buildUUID } from '/@/utils'
+import { useStore, mapMutations } from 'vuex'
 export default defineComponent({
-  name: "Login",
+  name: 'Login',
   methods: {
-    ...mapMutations("site", ["LOGIN"]),
+    ...mapMutations('site', ['LOGIN'])
   },
   setup() {
-    const store = useStore();
-    const { t } = useI18n();
+    const store = useStore()
+    const { t } = useI18n()
+    const form = ref(null)
 
-    const captchaURI = getCaptcha();
+    const captchaURI = getCaptcha()
     const state = reactive({
-      uuid: "",
-      password: "",
-      username: "",
-      captcha: "",
-    });
-    state.uuid = buildUUID();
+      uuid: '',
+      password: '',
+      username: '',
+      captcha: ''
+    })
+    state.uuid = buildUUID()
 
     const captchaUrl = computed(() => {
-      return captchaURI + state.uuid;
-    });
+      return captchaURI + state.uuid
+    })
 
     // 获取验证码
     function getCaptchaHandle() {
-      state.uuid = buildUUID();
+      state.uuid = buildUUID()
     }
 
     // 登录
     function loginHandle() {
-      this.$refs["form"].validate((valid: any) => {
+      form.value.validate((valid: any) => {
         if (valid) {
           store
-            .dispatch("site/LOGIN", state)
+            .dispatch('site/LOGIN', state)
             .then((response) => {})
             .catch((message: any) => {
-              getCaptchaHandle();
-            });
+              getCaptchaHandle()
+            })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     }
 
     // 验证 username password captcha
@@ -123,48 +110,49 @@ export default defineComponent({
       username: [
         {
           required: true,
-          message: t("login.usernamePlaceholder"),
-          trigger: "blur",
-        },
+          message: t('login.usernamePlaceholder'),
+          trigger: 'blur'
+        }
       ],
       password: [
         {
           required: true,
-          message: t("login.passwordPlaceholder"),
-          trigger: "blur",
-        },
+          message: t('login.passwordPlaceholder'),
+          trigger: 'blur'
+        }
       ],
       captcha: [
         {
           required: true,
-          message: t("login.captchaPlaceholder"),
-          trigger: "blur",
-        },
-      ],
-    };
+          message: t('login.captchaPlaceholder'),
+          trigger: 'blur'
+        }
+      ]
+    }
 
     // 发送数据前对数据再次处理
     function beforeRequestHook(config: any) {
-      return config;
+      return config
     }
 
     // 获取数据以后对数据进行处理
     function requestSuccessHook(results: any) {
-      return results;
+      return results
     }
 
     // 请求成功以后数据错误状态处理
     function requestFailedHook(message: any, data: any) {
-      return message;
+      return message
     }
 
     return {
       getCaptchaHandle,
+      form,
       loginHandle,
       captchaUrl,
       state,
-      rules,
-    };
-  },
-});
+      rules
+    }
+  }
+})
 </script>

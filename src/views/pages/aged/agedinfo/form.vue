@@ -14,6 +14,7 @@
             ref="uploadFile"
             :type="'one'"
             :items="images"
+            :style-text="'width: 300px;'"
             :disabled="pageType === 'detail'"
             @success-callback="uploadSuccessHandle"
           ></UploadFile>
@@ -389,9 +390,9 @@ export default defineComponent({
     function submitHandle() {
       const cMethod = pageType.value === 'create' ? createAgedAgedinfoHandle : updateAgedAgedinfoHandle // 模板修改标记
       const cFormData = unref(formData)
-      formPageSubmitHandle(cMethod, cFormData, () => {
+      formPageSubmitHandle(cMethod, cFormData, (response: any) => {
         emit('update-table')
-        emit('hide-dialog')
+        emit('hide-dialog', response)
         emit('show-skeleton')
       })
     }

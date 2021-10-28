@@ -59,8 +59,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { mapGetters } from 'vuex'
-import store from '/@/store'
+import { mapGetters, useStore } from 'vuex'
+import router from '/@/router'
 import { addTab } from '/@/utils/tabs'
 export default defineComponent({
   name: 'LayoutSiderItem',
@@ -75,11 +75,13 @@ export default defineComponent({
     // 用于判断是否展开
     ...mapGetters('adapter', ['getIsOpen'])
   },
-  setup(props, { slots }) {},
-  methods: {
-    clickSiderItemHandle(item: any) {
+  setup(props, { slots }) {
+    const store = useStore()
+
+    function clickSiderItemHandle(item: any) {
+      console.log('clickSiderItemHandle')
       const { index } = item
-      const ite = this.getFlatDataById(index)
+      const ite = store.getters['route/getFlatDataById'](index)
       if (ite.length) {
         const path = ite[ite.length - 1]['path']
         const id = ite[ite.length - 1]['meta']['id']
@@ -92,7 +94,7 @@ export default defineComponent({
           window.open(url, '_target')
         } else {
           // 路由跳转
-          this.$router.push({ path })
+          router.push({ path })
           // 设置高亮
           store.dispatch('sider/SET_SIDER_DEFAULTACTIVE', id)
           // 保存当前path
@@ -103,6 +105,10 @@ export default defineComponent({
           }
         }
       }
+    }
+
+    return {
+      clickSiderItemHandle
     }
   }
 })

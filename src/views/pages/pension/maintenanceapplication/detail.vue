@@ -44,6 +44,7 @@
             ref="uploadFile"
             :type="'many'"
             :items="oss"
+            :style-text="'width: 300px'"
             :disabled="pageType === 'detail'"
             @success-callback="uploadSuccessHandle"
           ></UploadFile>
@@ -131,6 +132,7 @@ import { useI18n } from 'vue-i18n'
 import { StyleEnum } from '/@/enums/styleEnum'
 import { mapGetters } from 'vuex'
 // components
+import { UploadFile } from '/@/components/UploadFile'
 // hooks
 import useFormPageComponent from '/@/hooks/component/formPage'
 // API封装
@@ -143,7 +145,7 @@ import formMixin from '/@/mixins/formMixin'
 export default defineComponent({
   name: 'PensionMaintenanceapplicationForm', // 模板修改标记
   mixins: [formMixin],
-  components: {},
+  components: { UploadFile },
   computed: {
     ...mapGetters('dict', ['getDictByType'])
   },

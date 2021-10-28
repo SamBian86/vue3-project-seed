@@ -37,7 +37,7 @@
             filterable
             clearable
           >
-            <el-option v-for="item in sysCommunityListAll" :key="item.id" :label="item.name" :value="item.id"></el-option>
+            <el-option v-for="item in sysCommunityListAll" :key="item.code" :label="item.name" :value="item.code"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
@@ -76,7 +76,7 @@
         :md="12"
         :lg="12"
         :xl="12"
-        v-if="formData.exchangeType === 1 || pageType === 'create'"
+        v-if="formData.exchangeType === '1' || formData.exchangeType === undefined"
       >
         <el-form-item :label="$t('HouseExchangeinfo.leaseType')" prop="leaseType">
           <el-select
@@ -96,7 +96,7 @@
           </el-select>
         </el-form-item>
       </el-col>
-      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="12" :lg="12" :xl="12" v-if="formData.exchangeType === 2">
+      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="12" :lg="12" :xl="12" v-if="formData.exchangeType === '2'">
         <el-form-item :label="$t('HouseExchangeinfo.year')" prop="year">
           <el-date-picker
             :size="StyleEnum.FORM_SIZE"
@@ -152,7 +152,7 @@
         </el-form-item>
       </el-col>
       <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="24" :lg="24" :xl="24">
-        <el-form-item v-if="pageType === 'create' || pageType === 'update'">
+        <el-form-item v-if="pageType === 'create' || pageType === 'update' || pageType === 'publish'">
           <el-button type="primary" @click="submitHandle" :size="StyleEnum.BUTTON_SIZE">
             {{ $t('form.submit') }}
           </el-button>
@@ -195,6 +195,7 @@ export default defineComponent({
       formData,
       createHouseExchangeinfoHandle,
       updateHouseExchangeinfoHandle,
+      publishHouseExchangeinfoHandle,
       getHouseExchangeinfoByIdHandle,
       formPageResetHandle
     } = useHouseExchangeinfoRepository() // 模板修改标记
@@ -225,7 +226,7 @@ export default defineComponent({
           formPageResetHandle(hideSkeleton)
           defaultConfigHandle()
         }
-        if (type === 'update' || type === 'detail') {
+        if (type === 'update' || type === 'publish') {
           getHouseExchangeinfoByIdHandle(params, hideSkeleton).then((response: any) => {
             const { photoList } = response.houseExchangeInfo
             if (photoList) {
@@ -277,7 +278,13 @@ export default defineComponent({
 
     // 提交逻辑
     function submitHandle() {
-      const cMethod = pageType.value === 'create' ? createHouseExchangeinfoHandle : updateHouseExchangeinfoHandle // 模板修改标记
+      const cMethod =
+        pageType.value === 'create'
+          ? createHouseExchangeinfoHandle
+          : pageType.value === 'update'
+          ? updateHouseExchangeinfoHandle
+          : publishHouseExchangeinfoHandle // 模板修改标记
+
       const cFormData = unref(formData)
       formPageSubmitHandle(cMethod, cFormData, () => {
         emit('update-table')

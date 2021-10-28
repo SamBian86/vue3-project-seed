@@ -3,6 +3,7 @@
   flex-wrap: wrap
   .form_item_upload_file_item
     margin-right: 10px
+    cursor: pointer
 .form_item_upload_file
   .el-upload--picture-card
     height: 30px
@@ -15,6 +16,7 @@
   .form_item_upload_image
     // height: 100px
     // width: 100%
+    cursor: pointer
   .form_item_upload_delete
     display: none
   &:hover .form_item_upload_delete
@@ -30,32 +32,55 @@
     position: absolute
     right: 0
     bottom: 0
-.form_item_upload_file_wrapper,.form_item_upload_video_wrapper,.form_item_upload_audio_wrapper // 文件容器
+.form_item_upload_file_wrapper,.form_item_upload_video_wrapper,.form_item_upload_audio_wrapper,.form_item_upload_unknown_wrapper // 文件容器
   position: relative
   overflow: hidden
+  height: 30px
+  line-height: 30px
   margin-bottom: 10px
   .form_item_upload_file
-    height: 30px
-    line-height: 30px
-    font-size: 14px
+    padding-right: 50px
   .form_item_upload_delete
     display: none
   &:hover .form_item_upload_delete
     display: block
     position: absolute
     right: 0px
-    top: 0px
+    top: 5px
     font-size: 20px
     cursor: pointer
     z-index: 100
     color: #000
   .form_item_upload_item_type
     position: absolute
-    right: 0
-    bottom: 0
+    right: 20px
+    top: 0px
     // height: 30px
     overflow: hidden
     .form_item_upload_item_type_image
       width: 30px
       height: 30px
       overflow: hidden
+.form_item_upload_unknown_wrapper
+  .form_item_upload_file
+    padding-right: 20px
+  &:hover .form_item_upload_delete
+    right: 0px
+    top: 5px
+.video-dialog-page
+  .el-dialog__header
+    padding: 0
+    .el-dialog__headerbtn
+      top: 8px
+      right: 8px
+  .el-dialog__body
+    padding: 0 10px 10px 10px
+  .el-dialog__footer
+    padding: 0
+  .form_item_upload_file_video_container
+    padding-top: 30px
+    video
+      width: 100%
+.is-mobile
+  .video-dialog-page
+    width: 100% !important

@@ -204,6 +204,7 @@ export default defineComponent({
       formData,
       pageType,
       rules,
+      oss,
       // 表单引用
       ruleForm,
       // 表单中相关项初始化数据

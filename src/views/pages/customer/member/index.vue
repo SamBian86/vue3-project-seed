@@ -6,33 +6,25 @@
           <el-form ref="searchForm" :model="tableParams" label-position="left" @keydown.enter.native="pgTableQuery(tableParams)">
             <el-row :gutter="StyleEnum.ROW_GUTTER">
               <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="4" :lg="4" :xl="4">
-                <el-form-item prop="username">
+                <el-form-item prop="name">
                   <el-input
                     :size="StyleEnum.INPUT_SIZE"
-                    v-model="tableParams.username"
-                    :placeholder="$t('SysUser.username')"
+                    v-model="tableParams.name"
+                    :placeholder="$t('CustomerMember.namePlaceHolder')"
                     clearable
                   ></el-input>
                 </el-form-item>
               </el-col>
-              <!-- <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="4" :lg="4" :xl="4">
-                <el-form-item prop="usetype">
-                  <el-select
-                    class="el-select-block"
-                    :size="StyleEnum.FORM_SIZE"
-                    v-model="tableParams.usetype"
-                    :placeholder="$t('SysUser.usetype')"
+              <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="4" :lg="4" :xl="4">
+                <el-form-item prop="phone">
+                  <el-input
+                    :size="StyleEnum.INPUT_SIZE"
+                    v-model="tableParams.phone"
+                    :placeholder="$t('CustomerMember.phonePlaceHolder')"
                     clearable
-                  >
-                    <el-option
-                      v-for="item in getDictByType('usetype')"
-                      :key="item.dictValue"
-                      :label="item.dictLabel"
-                      :value="item.dictValue"
-                    ></el-option>
-                  </el-select>
+                  ></el-input>
                 </el-form-item>
-              </el-col> -->
+              </el-col>
             </el-row>
           </el-form>
         </template>
@@ -41,7 +33,7 @@
             <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="24" :lg="24" :xl="24">
               <el-button
                 type="primary"
-                v-if="filterPermission('sys:user:view')"
+                v-if="filterPermission('customer:member:view')"
                 :size="StyleEnum.BUTTON_SIZE"
                 @click="pgTableQuery(tableParams)"
               >
@@ -49,7 +41,7 @@
               </el-button>
               <!-- <el-button
                 type="primary"
-                v-if="filterPermission('sys:user:save')"
+                v-if="filterPermission('customer:member:save')"
                 :size="StyleEnum.BUTTON_SIZE"
                 @click="openHandle('create')"
               >
@@ -58,42 +50,88 @@
               <el-button :size="StyleEnum.BUTTON_SIZE" @click="pgTableResetHandle">
                 {{ $t('table.reset') }}
               </el-button>
+              <el-button
+                type="primary"
+                v-if="filterPermission('customer:member:download')"
+                :size="StyleEnum.BUTTON_SIZE"
+                @click="exportHandle(tableParams)"
+              >
+                {{ $t('table.download') }}
+              </el-button>
+              <UploadFileButton
+                v-if="filterPermission('customer:member:import')"
+                ref="uploadFileButton"
+                :upload-api="batchImportCustomerMemberHandle"
+                @success-callback="uploadSuccessHandle"
+              >
+                <el-button type="primary" :size="StyleEnum.BUTTON_SIZE">{{ $t('table.import') }}</el-button>
+              </UploadFileButton>
             </el-col>
           </el-row>
         </template>
         <template v-slot:content>
           <el-table-column
-            prop="username"
+            prop="name"
             :show-overflow-tooltip="true"
-            :label="$t('SysUser.username')"
-            width="160"
-          ></el-table-column>
-          <el-table-column prop="deptName" :show-overflow-tooltip="true" :label="$t('SysUser.deptName')"></el-table-column>
-          <el-table-column prop="email" :show-overflow-tooltip="true" :label="$t('SysUser.email')"></el-table-column>
-          <el-table-column
-            prop="mobile"
-            :show-overflow-tooltip="true"
-            :label="$t('SysUser.mobile')"
+            :label="$t('CustomerMember.name')"
             width="140"
           ></el-table-column>
-          <el-table-column prop="status" :show-overflow-tooltip="true" :label="$t('SysUser.status')" width="200">
-            <template #default="scope">
-              <el-tag v-if="scope.row.status === 0" :size="StyleEnum.TAG_SIZE" type="danger">{{ scope.row.statusName }}</el-tag>
-              <el-tag v-if="scope.row.status === 1" :size="StyleEnum.TAG_SIZE" type="success">{{ scope.row.statusName }}</el-tag>
-            </template>
-          </el-table-column>
           <el-table-column
-            prop="createDate"
+            prop="phone"
             :show-overflow-tooltip="true"
-            :label="$t('SysUser.createDate')"
+            :label="$t('CustomerMember.phone')"
             width="160"
           ></el-table-column>
+          <el-table-column
+            prop="idCard"
+            :show-overflow-tooltip="true"
+            :label="$t('CustomerMember.idCard')"
+            min-width="200"
+          ></el-table-column>
+          <el-table-column
+            prop="memberIdentity"
+            :show-overflow-tooltip="true"
+            :label="$t('CustomerMember.memberIdentity')"
+            width="120"
+          ></el-table-column>
+          <el-table-column
+            prop="memberLevel"
+            :show-overflow-tooltip="true"
+            :label="$t('CustomerMember.memberLevel')"
+            width="120"
+          ></el-table-column>
+          <el-table-column
+            prop="balance"
+            :show-overflow-tooltip="true"
+            :label="$t('CustomerMember.balance')"
+            width="80"
+          ></el-table-column>
+          <el-table-column
+            prop="registShop"
+            :show-overflow-tooltip="true"
+            :label="$t('CustomerMember.registShop')"
+            width="120"
+          ></el-table-column>
+          <el-table-column
+            prop="source"
+            :show-overflow-tooltip="true"
+            :label="$t('CustomerMember.memberSource')"
+            min-width="200"
+          ></el-table-column>
 
-          <el-table-column :show-overflow-tooltip="true" :label="$t('table.handle')" width="120">
+          <el-table-column :show-overflow-tooltip="true" :label="$t('table.handle')" width="80">
             <template #default="scope">
               <el-button
                 type="text"
-                v-if="filterPermission('sys:user:update')"
+                v-if="filterPermission('customer:member:view')"
+                :size="StyleEnum.BUTTON_SIZE"
+                @click="openHandle('detail', scope.row)"
+              >
+                {{ $t('table.detail') }}
+              </el-button>
+              <!-- <el-button
+                type="text"
+                v-if="filterPermission('customer:member:update')"
                 :size="StyleEnum.BUTTON_SIZE"
                 @click="openHandle('update', scope.row)"
               >
@@ -101,12 +139,12 @@
               </el-button>
               <el-button
                 type="text"
-                v-if="filterPermission('sys:user:delete')"
+                v-if="filterPermission('customer:member:delete')"
                 :size="StyleEnum.BUTTON_SIZE"
                 @click="deleteHandle({ id: scope.row.id })"
               >
                 {{ $t('table.delete') }}
-              </el-button>
+              </el-button> -->
             </template>
           </el-table-column>
         </template>
@@ -117,20 +155,20 @@
         <template #body>
           <SkeletonPage ref="skeletonPage">
             <template v-slot:content>
-              <SysUserForm
+              <CustomerMemberForm
                 ref="formPage"
                 :page-type="formPageType"
                 :page-params="formPageParams"
                 @show-skeleton="showSkeleton"
                 @hide-skeleton="hideSkeleton"
                 @hide-dialog="hideDialog"
-                @update-table="pgTableQuery(tableParams)"
+                @update-table="pgTableQuery"
               />
             </template>
           </SkeletonPage>
         </template>
         <template #title>
-          {{ $t('SysUser.dialogPageTitle') }}
+          {{ $t('CustomerMember.pageTitle') }}
         </template>
       </DialogPage>
     </el-col>
@@ -145,24 +183,25 @@ import { StyleEnum } from '/@/enums/styleEnum'
 import { PgTable } from '/@/components/PgTable'
 import { SkeletonPage } from '/@/components/SkeletonPage'
 import { DialogPage } from '/@/components/DialogPage'
+import { UploadFileButton } from '/@/components/UploadFileButton'
 // hooks
 import useSkeletonPageComponent from '/@/hooks/component/skeletonPage'
 import usePgTableComponent from '/@/hooks/component/pgTable'
 import useFormPageComponent from '/@/hooks/component/formPage'
 import useDialogPageComponent from '/@/hooks/component/dialogPage'
 // API封装
-import useSysUserRepository from './useSysUserRepository' // 模板修改标记
+import useCustomerMemberRepository from './useCustomerMemberRepository' // 模板修改标记
 // mixin
 import tableMixin from '/@/mixins/tableMixin'
 // 表单页面
-import SysUserForm from './form.vue'
+import CustomerMemberForm from './form.vue'
 export default defineComponent({
-  name: 'SysUser', // 模板修改标记
+  name: 'CustomerMember', // 模板修改标记
   mixins: [tableMixin],
-  components: { PgTable, SkeletonPage, DialogPage, SysUserForm }, // 模板修改标记
+  components: { PgTable, SkeletonPage, DialogPage, UploadFileButton, CustomerMemberForm }, // 模板修改标记
   computed: {
     ...mapGetters('permission', ['filterPermission']),
-    ...mapGetters('dict', ['getDictByType'])
+    ...mapGetters('dict', ['getDictByType', 'getDictNameByValue'])
   },
   setup(props) {
     // 约定，在页面直接使用的方法都以Handle结尾，子组件中的方法不以Handle作为结尾
@@ -175,8 +214,6 @@ export default defineComponent({
     const searchForm = ref(null)
     const tableParams = reactive({
       // 模板修改标记
-      username: ''
-      // usetype: ''
     })
     // 重置方法
     function pgTableResetHandle() {
@@ -185,11 +222,12 @@ export default defineComponent({
     }
 
     // API相关
-    const { getPageHandle, deleteSysUserByIdHandle } = useSysUserRepository() // 模板修改标记
+    const { getPageHandle, exportHandle, batchImportCustomerMemberHandle } = useCustomerMemberRepository() // 模板修改标记
 
     // formPage相关代码开始
     const formPage = ref(null)
-    const { formPageType, formPageParams, formPageCreateHandle, formPageUpdateHandle } = useFormPageComponent(formPage)
+    const { formPageType, formPageParams, formPageCreateHandle, formPageUpdateHandle, formPageDetailHandle } =
+      useFormPageComponent(formPage)
 
     // dialogPage相关代码开始
     const dialogPage = ref(null)
@@ -202,6 +240,9 @@ export default defineComponent({
         }
         if (type === 'update') {
           updateHandle({ ...item, t: new Date().getTime() })
+        }
+        if (type === 'detail') {
+          detailHandle({ ...item, t: new Date().getTime() })
         }
       }, StyleEnum.OPEN_DIALOG_TIME)
     }
@@ -219,17 +260,27 @@ export default defineComponent({
       hideSkeleton()
       formPageUpdateHandle(params)
     }
-    // 删除
-    function deleteHandle(params: any) {
-      deleteSysUserByIdHandle(params, () => {
-        // 模板修改标记
-        pgTableQuery(tableParams)
-      })
+    // 详情
+    function detailHandle(params: any) {
+      hideSkeleton()
+      formPageDetailHandle(params)
     }
+    // 删除
+    // function deleteHandle(params: any) {
+    //   deleteCustomerMemberByIdHandle(params, () => {
+    //     // 模板修改标记
+    //     pgTableQuery(tableParams)
+    //   })
+    // }
 
     // 查询框初始化数据相关代码
     // 模板修改标记 是否有初始化数据
     // formPage相关代码开始
+
+    // 上传成功回调
+    function uploadSuccessHandle() {
+      pgTableReset()
+    }
 
     return {
       // 基础支持
@@ -256,8 +307,10 @@ export default defineComponent({
       formPageParams,
       // API
       getPageHandle, // 模板修改标记 获取分页数据
-      // exportHandle // 模板修改标记 导出方法
-      deleteHandle
+      exportHandle, // 模板修改标记 导出方法
+      // deleteHandle
+      uploadSuccessHandle,
+      batchImportCustomerMemberHandle
     }
   }
 })

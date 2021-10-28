@@ -89,7 +89,9 @@
             ref="uploadFile"
             :type="'many'"
             :items="oss"
+            :style-text="'width: 300px'"
             :disabled="pageType === 'detail'"
+            :accept-file="'imageAndVideo'"
             @success-callback="uploadSuccessHandle"
           ></UploadFile>
         </el-form-item>

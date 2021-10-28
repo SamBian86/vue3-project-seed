@@ -53,8 +53,9 @@
           <el-select
             class="el-select-block"
             :size="StyleEnum.FORM_SIZE"
-            v-model="formData.serverAreaList"
+            v-model="serverAreaItems"
             :placeholder="$t('SysBannerinfo.serverAreaListPlaceHolder')"
+            @change="serverAreaHandle"
             multiple
             :disabled="serverAreaListDisabled"
             clearable
@@ -112,6 +113,7 @@ export default defineComponent({
     const { t } = useI18n()
     const pageType = ref(props.pageType)
     const images = ref([])
+    const serverAreaItems = ref([])
 
     const {
       formData,
@@ -160,13 +162,15 @@ export default defineComponent({
         }
         if (type === 'update' || type === 'detail') {
           getSysBannerinfoByIdHandle(params, hideSkeleton).then((response: any) => {
-            const { operationType, url } = response
+            const { operationType, operationId, url } = response
             if (url) {
               images.value = [{ url }]
             } else {
               images.value = []
             }
+            serverAreaItems.value = response.serverAreaList.map((item: any) => item.id)
             operationTypeHandle(operationType)
+            operationIdChangeHandle(operationId)
           }) // 模板修改标记
         }
         pageType.value = type
@@ -220,14 +224,29 @@ export default defineComponent({
       }
     }
 
-    // operationIdChangeHandle
+    // Banner内容 change事件
     function operationIdChangeHandle(operationId: any) {
       const { operationType } = formData.value
+      // 获取所属区域列表
       getSysBannerinfoOperationServerareaHandle({ operationType, operationId }).then((response) => {
         if (operationType === '1' || operationType === '2' || operationType === '4') {
           formData.value.serverAreaList = response
+          serverAreaItems.value = response.map((item: any) => item.id)
         }
       })
+    }
+
+    // 所属区域change事件
+    function serverAreaHandle(value: any) {
+      const _serverAreaItems = Array.prototype.slice.call(value)
+      const serverAreaList = []
+      sysBannerinfoOperationServerarea.value.forEach((item) => {
+        if (_serverAreaItems.includes(item.id)) {
+          serverAreaList.push(item)
+        }
+      })
+      formData.value.serverAreaList = serverAreaList
+      serverAreaItems.value = _serverAreaItems
     }
 
     // switchViewByOperationType
@@ -360,6 +379,8 @@ export default defineComponent({
       operationTypeChangeHandle,
       operationIdChangeHandle,
       sysBannerinfoOperation,
+      serverAreaHandle,
+      serverAreaItems,
       sysBannerinfoOperationServerarea,
       operationIdTitle,
       operationShow,

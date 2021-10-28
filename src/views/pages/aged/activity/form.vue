@@ -74,6 +74,19 @@
         </el-form-item>
       </el-col>
       <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="24" :lg="24" :xl="24">
+        <el-form-item :label="$t('AgedActivity.signEnd')" prop="signEnd">
+          <el-date-picker
+            :size="StyleEnum.FORM_SIZE"
+            v-model="formData.signEnd"
+            format="YYYY-MM-DD HH:mm:ss"
+            value-format="YYYY-MM-DD HH:mm:ss"
+            type="datetime"
+            :placeholder="$t('AgedActivity.signEndPlaceHolder')"
+            clearable
+          />
+        </el-form-item>
+      </el-col>
+      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="24" :lg="24" :xl="24">
         <el-form-item :label="$t('AgedActivity.deptId')" prop="deptId">
           <el-cascader
             :class="'form-page-cascader'"
@@ -288,6 +301,7 @@ export default defineComponent({
       title: [{ required: true, message: t('AgedActivity.titlePlaceHolder'), trigger: 'blur' }], // 模板修改标记
       cateId: [{ required: true, message: t('AgedActivity.cateIdPlaceHolder'), trigger: 'change' }], // 模板修改标记
       communityIds: [{ required: true, message: t('AgedActivity.communityIdsPlaceHolder'), trigger: 'change' }], // 模板修改标记
+      signEnd: [{ required: true, message: t('AgedActivity.signEndPlaceHolder'), trigger: 'change' }], // 模板修改标记
       date: [{ required: true, message: t('AgedActivity.datePlaceHolder'), trigger: 'change' }], // 模板修改标记
       deptId: [{ required: true, message: t('AgedActivity.deptIdPlaceHolder'), trigger: 'change' }], // 模板修改标记
       closed: [{ required: true, message: t('AgedActivity.closedPlaceHolder'), trigger: 'change' }], // 模板修改标记

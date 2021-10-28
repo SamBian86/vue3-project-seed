@@ -44,12 +44,7 @@
                     filterable
                     clearable
                   >
-                    <el-option
-                      v-for="item in sysCommunityListAll"
-                      :key="item.code"
-                      :label="item.name"
-                      :value="item.code"
-                    ></el-option>
+                    <el-option v-for="item in sysCommunityListAll" :key="item.id" :label="item.name" :value="item.id"></el-option>
                   </el-select>
                 </el-form-item>
               </el-col>
@@ -245,7 +240,7 @@ export default defineComponent({
     // API相关
     const { getPageHandle, deletePensionMaintenanceworkerByIdHandle } = usePensionMaintenanceworkerRepository() // 模板修改标记
     const { sysCommunityListAll, getSysCommunityListAllHandle } = useSysCommunityRepository()
-    getSysCommunityListAllHandle({ familyLocation: true })
+    getSysCommunityListAllHandle()
     const { sysDeptTree, getSysDeptTreeHandle } = useSysDeptRepository()
     getSysDeptTreeHandle()
     // formPage相关代码开始

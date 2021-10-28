@@ -256,6 +256,9 @@ export default defineComponent({
         if (!!serverCategoryId) {
           tableParams.serverCategoryId = serverCategoryId
           pgTableQuery(tableParams)
+        } else {
+          tableParams.serverCategoryId = ''
+          pgTableQuery(tableParams)
         }
       }
     )

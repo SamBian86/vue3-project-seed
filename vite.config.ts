@@ -18,13 +18,6 @@ export default defineConfig({
       find: /\/#\//, replacement: pathResolve('types') + '/'
     }],
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `$injectedColor: orange;`
-      }
-    }
-  },
   plugins: [
     vue(),
     ViteComponents({

@@ -8,7 +8,7 @@
     :disabled="pageType === 'detail'"
   >
     <el-row :gutter="StyleEnum.ROW_GUTTER">
-      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="6" :lg="6" :xl="6">
+      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="4" :lg="4" :xl="4">
         <el-form-item :label="$t('SysRole.name')" prop="name">
           <el-input v-model="formData.name" :placeholder="$t('SysRole.name')" clearable></el-input>
         </el-form-item>
@@ -30,7 +30,7 @@
           </el-button>
         </el-form-item>
       </el-col>
-      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="6" :lg="6" :xl="6">
+      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="5" :lg="5" :xl="5">
         <el-form-item :label="$t('SysRole.menuIdList')" prop="menuIdList">
           <TreeItem
             ref="menuTree"
@@ -45,7 +45,7 @@
           />
         </el-form-item>
       </el-col>
-      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="6" :lg="6" :xl="6">
+      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="5" :lg="5" :xl="5">
         <el-form-item :label="$t('SysRole.deptIdList')" prop="deptIdList">
           <TreeItem
             ref="deptTree"
@@ -59,13 +59,28 @@
           />
         </el-form-item>
       </el-col>
-      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="6" :lg="6" :xl="6">
+      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="5" :lg="5" :xl="5">
         <el-form-item :label="$t('SysRole.appMenuIdList')" prop="appMenuIdList">
           <TreeItem
             ref="appMenuTree"
             :tree-method="getSysMenuPermissionListTreeHandle"
             :response-name="'appTree'"
             :default-checked-keys="formData.appMenuIdList"
+            :expand-on-click-node="false"
+            :props="defaultMenuProps"
+            :check-strictly="true"
+            show-checkbox
+            node-key="id"
+          />
+        </el-form-item>
+      </el-col>
+      <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="5" :lg="5" :xl="5">
+        <el-form-item :label="$t('SysRole.miniIdList')" prop="miniIdList">
+          <TreeItem
+            ref="miniTree"
+            :tree-method="getSysMenuPermissionListTreeHandle"
+            :response-name="'miniTree'"
+            :default-checked-keys="formData.miniIdList"
             :expand-on-click-node="false"
             :props="defaultMenuProps"
             :check-strictly="true"
@@ -149,8 +164,10 @@ export default defineComponent({
     const { getSysMenuPermissionListTreeHandle } = useSysMenuRepository()
     const menuTree = ref(null)
     const appMenuTree = ref(null)
+    const miniTree = ref(null)
     const menuTreeComponent = useTreeItemComponent(menuTree)
     const appMenuTreeComponent = useTreeItemComponent(appMenuTree)
+    const miniTreeComponent = useTreeItemComponent(miniTree)
     const defaultMenuProps = ref({
       children: 'children',
       label: 'name',
@@ -187,7 +204,8 @@ export default defineComponent({
       const menuIdList = menuTreeComponent.getCheckedKeys()
       const deptIdList = deptTreeComponent.getCheckedKeys()
       const appMenuIdList = appMenuTreeComponent.getCheckedKeys()
-      const cFormData = { ...unref(formData), menuIdList, deptIdList, appMenuIdList }
+      const miniIdList = miniTreeComponent.getCheckedKeys()
+      const cFormData = { ...unref(formData), menuIdList, deptIdList, appMenuIdList, miniIdList }
       formPageSubmitHandle(cMethod, cFormData, () => {
         emit('update-table')
         emit('show-skeleton')
@@ -207,6 +225,7 @@ export default defineComponent({
       // 后台权限
       menuTree,
       appMenuTree,
+      miniTree,
       defaultMenuProps,
       sysDeptTree,
       getSysMenuPermissionListTreeHandle,

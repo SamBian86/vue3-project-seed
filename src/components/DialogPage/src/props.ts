@@ -13,11 +13,15 @@ const props = {
   },
   fullscreen: {
     type: Boolean,
-    default: false
+    default: true
   },
   width: {
     type: String,
     default: '80%'
+  },
+  customClass: {
+    type: String,
+    default: ''
   }
 }
 

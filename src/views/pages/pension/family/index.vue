@@ -250,9 +250,9 @@ export default defineComponent({
     const searchForm = ref(null)
     const tableParams = reactive({
       // 模板修改标记
-      buildingId: query.buildingId ? query.buildingId : '',
-      communityName: query.communityName ? query.communityName : ''
+      buildingId: query.buildingId ? query.buildingId : ''
     })
+
     // 重置方法
     function pgTableResetHandle() {
       searchForm.value.resetFields()
@@ -262,10 +262,12 @@ export default defineComponent({
     watch(
       () => router.currentRoute.value.query,
       (value) => {
-        const { buildingId, communityName } = value
-        if (!!buildingId && !!communityName) {
+        const { buildingId } = value
+        if (!!buildingId) {
           tableParams.buildingId = buildingId
-          tableParams.communityName = communityName
+          pgTableQuery(tableParams)
+        } else {
+          tableParams.buildingId = ''
           pgTableQuery(tableParams)
         }
       }
@@ -301,6 +303,8 @@ export default defineComponent({
     function createHandle() {
       hideSkeleton()
       formPageCreateHandle()
+      formPageParams.value.communityCode = query.communityCode ? query.communityCode : ''
+      formPageParams.value.buildingId = query.buildingId ? query.buildingId : ''
     }
     // 修改
     function updateHandle(params: any) {

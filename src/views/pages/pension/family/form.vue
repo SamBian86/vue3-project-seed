@@ -86,6 +86,7 @@ export default defineComponent({
     const pageType = ref(props.pageType)
     const { formData, createPensionFamilyHandle, updatePensionFamilyHandle, getPensionFamilyByIdHandle, formPageResetHandle } =
       usePensionFamilyRepository() // 模板修改标记
+
     const { sysCommunityListAll, getSysCommunityListAllHandle } = useSysCommunityRepository()
     getSysCommunityListAllHandle()
     const { pensionBuildingListAll, getPensionBuildingListAllHandle } = usePensionBuildingRepository()
@@ -108,12 +109,16 @@ export default defineComponent({
       // 监听当前组件的pageType、pageParams改变时的处理，默认先显示skeleton
       watch([() => props.pageType, () => props.pageParams], ([type, params], [prevType, prevParams]) => {
         showSkeleton()
-
         // console.log('already')
         // 修改变成创建
         if (type === 'create') {
           formPageResetHandle(hideSkeleton)
           defaultConfigHandle()
+          formData.value.communityCode = params.communityCode ? params.communityCode : ''
+          formData.value.buildingId = params.buildingId ? params.buildingId : ''
+          if (params.communityCode) {
+            getPensionBuildingListAllHandle({ communityCode: params.communityCode })
+          }
         }
         if (type === 'update' || type === 'detail') {
           getPensionFamilyByIdHandle(params, hideSkeleton).then((response: any) => {

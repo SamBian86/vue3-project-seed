@@ -6,6 +6,7 @@ export default function useFormPageComponent(formPageRef: any) {
   const { t } = useI18n()
   const formPageType = ref('')
   const formPageParams = ref({})
+  const submitTag = ref(false)
 
   // 移除校验结果
   function clearValidate() {
@@ -39,17 +40,20 @@ export default function useFormPageComponent(formPageRef: any) {
   const formPageSubmitHandle = (method: any, params: any, callback: any) => {
     formPageRef.value.validate((valid: any) => {
       if (valid) {
-        // method(params)
-        if (method) {
+        submitTag.value = true
+        if (method && submitTag.value) {
           method(params).then((response: any) => {
             ElMessage.success(t('form.submitSuccessMessage'));
-            callback && callback()
+            callback && callback(response)
+            submitTag.value = false
+          }).catch((message: any) => {
+            submitTag.value = true
           })
         } else {
           callback && callback()
         }
       } else {
-        console.log("error submit!!");
+        submitTag.value = false
         return false;
       }
     });
@@ -58,6 +62,7 @@ export default function useFormPageComponent(formPageRef: any) {
   return {
     formPageType,
     formPageParams,
+    submitTag,
     clearValidate,
     setDefaultValue,
     formPageCreateHandle,

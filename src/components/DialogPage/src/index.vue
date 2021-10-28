@@ -3,8 +3,9 @@
   <el-dialog
     ref="dialogComponent"
     :fullscreen="fullscreen"
+    :width="width"
     v-model="pageDialog"
-    custom-class="component-dialog-page"
+    :custom-class="`component-dialog-page ${customClass}`"
     append-to-body
     destroy-on-close
   >
@@ -27,7 +28,9 @@ export default defineComponent({
   setup(props, { emit }) {
     const dialogComponent = ref(null)
     const refName = ref(props.refName + Math.random())
-    const fullscreen = ref(true)
+    const fullscreen = ref(props.fullscreen)
+    const width = ref(props.width)
+    const customClass = ref(props.customClass)
     const pageDialog = ref(false)
 
     function showDialog() {
@@ -42,6 +45,8 @@ export default defineComponent({
       dialogComponent,
       refName,
       fullscreen,
+      width,
+      customClass,
       pageDialog,
       showDialog,
       hideDialog

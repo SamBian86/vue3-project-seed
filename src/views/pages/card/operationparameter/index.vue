@@ -197,6 +197,9 @@ export default defineComponent({
         if (!!operationInterfaceId) {
           tableParams.operationInterfaceId = operationInterfaceId
           pgTableQuery(tableParams)
+        } else {
+          tableParams.operationInterfaceId = ''
+          pgTableQuery(tableParams)
         }
       }
     )

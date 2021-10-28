@@ -20,8 +20,8 @@ export function reViewWhenRefresh(menus: Array<any>) {
   // 当前路由
   const { path } = router.currentRoute.value
   const item = store.getters['route/getFlatDataByPath'](path)
-  const siderDefaultActive = item.length === 1 ? item[0]['meta']['id'] : null
-  // const level = item.length === 1 ? item[0]['meta']['level'] : 0
+  const siderDefaultActive = item.length ? item[0]['meta']['id'] : null
+  // const level = item.length ? item[0]['meta']['level'] : 0
   const siderItems = findIdMaps(menus, siderDefaultActive)
   const tabItem = store.getters['route/getFlatDataById'](siderDefaultActive)
   // 设置左侧siderItems
@@ -30,8 +30,10 @@ export function reViewWhenRefresh(menus: Array<any>) {
   store.dispatch('sider/SET_SIDER_DEFAULTACTIVE', siderDefaultActive)
   // 设置头部menu高亮
   const { menuActiveId, menuActiveIndex } = getNavIdByTabId(siderDefaultActive);
-  store.dispatch("menu/SET_MENU_ACTIVEID", menuActiveId);
-  store.dispatch("menu/SET_MENU_ACTIVEINDEX", menuActiveIndex);
+  if (menuActiveId !== '') {
+    store.dispatch("menu/SET_MENU_ACTIVEID", menuActiveId);
+    store.dispatch("menu/SET_MENU_ACTIVEINDEX", menuActiveIndex);
+  }
 
   // 设置标签页tabs items
   store.dispatch('tabs/SET_TAB_ITEMS', tabItem)
