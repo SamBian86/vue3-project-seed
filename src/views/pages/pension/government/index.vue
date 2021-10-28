@@ -94,10 +94,10 @@
             width="100"
           >
             <template #default="scope">
-              <el-tag v-if="scope.row.governmentDisplay === 0" :size="StyleEnum.TAG_SIZE" type="success">
+              <el-tag v-if="scope.row.governmentDisplay === 0" :size="StyleEnum.TAG_SIZE" type="warning">
                 {{ $t('PensionGovernment.governmentDisplay0') }}
               </el-tag>
-              <el-tag v-if="scope.row.governmentDisplay === 1" :size="StyleEnum.TAG_SIZE" type="warning">
+              <el-tag v-if="scope.row.governmentDisplay === 1" :size="StyleEnum.TAG_SIZE" type="success">
                 {{ $t('PensionGovernment.governmentDisplay1') }}
               </el-tag>
             </template>
@@ -130,7 +130,7 @@
                   })
                 "
               >
-                {{ scope.row.governmentDisplay === 1 ? $t('table.on') : $t('table.off') }}
+                {{ scope.row.governmentDisplay === 0 ? $t('table.on') : $t('table.off') }}
               </el-button>
 
               <el-button

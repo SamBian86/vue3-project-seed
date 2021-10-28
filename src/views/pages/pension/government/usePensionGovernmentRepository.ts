@@ -81,7 +81,7 @@ export default function usePensionGovernmentRepository() {
   // 上/下架
   const displayPensionGovernmentHandle = (params: any, callback: any) => {
     const { display } = params
-    ElMessageBox.confirm(display === 1 ? t('table.offTipMessage') : t('table.onTipMessage'), t('table.deleteTipName'), {
+    ElMessageBox.confirm(display === 1 ? t('table.onTipMessage') : t('table.offTipMessage'), t('table.deleteTipName'), {
       confirmButtonText: t('table.sure'),
       cancelButtonText: t('table.cancel'),
       type: 'warning',
