@@ -73,7 +73,11 @@
         <el-input v-model="formData.qcloudSecretKey" :placeholder="$t('OssFile.qcloudSecretKeyPlaceHolder')" clearable></el-input>
       </el-form-item>
       <el-form-item :label="$t('OssFile.qcloudBucketName')" prop="qcloudBucketName">
-        <el-input v-model="formData.bbb" :placeholder="$t('OssFile.qcloudBucketNamePlaceHolder')" clearable></el-input>
+        <el-input
+          v-model="formData.qcloudBucketName"
+          :placeholder="$t('OssFile.qcloudBucketNamePlaceHolder')"
+          clearable
+        ></el-input>
       </el-form-item>
       <el-form-item :label="$t('OssFile.qcloudRegion')" prop="qcloudRegion">
         <el-select

@@ -130,7 +130,7 @@
           <el-select
             class="el-select-block"
             :size="StyleEnum.FORM_SIZE"
-            v-model="formData.bbb"
+            v-model="formData.married"
             :placeholder="$t('PensionResident.marriedPlaceHolder')"
             filterable
             clearable

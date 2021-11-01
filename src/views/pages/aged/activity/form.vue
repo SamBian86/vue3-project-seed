@@ -9,7 +9,7 @@
   >
     <el-row :gutter="StyleEnum.ROW_GUTTER">
       <el-col :xs="StyleEnum.COL_XS" :sm="StyleEnum.COL_SM" :md="24" :lg="24" :xl="24">
-        <el-form-item :label="$t('AgedActivity.photo')" prop="bbb">
+        <el-form-item :label="$t('AgedActivity.photo')" prop="photo">
           <UploadFile
             ref="uploadFile"
             :type="'one'"
@@ -319,13 +319,13 @@ export default defineComponent({
       images.value = items
       // one
       if (items.length !== 0) {
-        formData.value.bbb = items[0]['url']
+        formData.value.photo = items[0]['url']
       } else {
-        formData.value.bbb = ''
+        formData.value.photo = ''
       }
       // many
       // if (items.length !== 0) {
-      //   formData.value.bbb = items
+      //   formData.value.photo = items
       // }
     }
 

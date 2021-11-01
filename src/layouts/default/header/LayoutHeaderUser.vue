@@ -7,7 +7,7 @@
           src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
           fit="cover"
         ></el-image>
-        用户信息
+        {{ username }}
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <span v-else>
@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import { ElMessageBox, ElMessage } from 'element-plus'
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onMounted } from 'vue'
 import { useStore, mapGetters } from 'vuex'
 import { useI18n } from 'vue-i18n'
 // components
@@ -64,6 +64,14 @@ export default defineComponent({
   setup(props, { slots }) {
     const { t } = useI18n()
     const store = useStore()
+    const username = ref('')
+
+    onMounted(() => {
+      setTimeout(() => {
+        username.value = store.getters['userInfo/getUserName']
+      }, 200)
+    })
+
     const logout = () => {
       ElMessageBox.confirm(t('logout.title'), t('global.tips'), {
         confirmButtonText: t('global.confirm'),
@@ -95,6 +103,7 @@ export default defineComponent({
       logout,
       modify,
       dialogPage,
+      username,
       hideDialog
     }
   }

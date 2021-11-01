@@ -147,7 +147,7 @@ export default defineComponent({
 
     // 校验
     const rules = {
-      bbb: [{ required: true, message: t('AAA.bbbPlaceHolder'), trigger: 'blur' }] // 模板修改标记
+      // bbb: [{ required: true, message: t('AAA.bbbPlaceHolder'), trigger: 'blur' }] // 模板修改标记
     }
 
     // 提交逻辑

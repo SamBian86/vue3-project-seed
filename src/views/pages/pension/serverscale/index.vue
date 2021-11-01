@@ -136,7 +136,6 @@ export default defineComponent({
     const searchForm = ref(null)
     const tableParams = reactive({
       // 模板修改标记
-      bbb: ''
     })
     // 重置方法
     function pgTableResetHandle() {

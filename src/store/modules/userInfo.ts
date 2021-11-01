@@ -4,10 +4,10 @@ const { userInfo } = setting
 export default {
   namespaced: true,
   state: {
-    ...userInfo
+    userInfo
   },
   mutations: {
-    SET_USERINFO: (state: { userInfo: any; }, userInfo: Object) => {
+    SET_USERINFO: (state: any, userInfo: any) => {
       state.userInfo = userInfo
     },
   },
@@ -26,6 +26,8 @@ export default {
     },
   },
   getters: {
-
+    getUserName: (state: any) => {
+      return state.userInfo.username
+    },
   }
 }
