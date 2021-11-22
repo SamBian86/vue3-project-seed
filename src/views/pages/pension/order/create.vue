@@ -401,6 +401,7 @@ export default defineComponent({
     }
 
     function hideAddUser(response: any) {
+      formData.value.userId = response.userId
       sysFrontUserPhonelist.value.push({
         userId: response.userId,
         mobile: response.phoneNumber,
@@ -415,6 +416,7 @@ export default defineComponent({
     }
 
     function hideAddAddress(response: any) {
+      formData.value.addressId = response.id
       agedLinkaddressDelivery.value.push({
         address: response.address,
         addressId: response.id,

@@ -42,6 +42,7 @@
             ref="uploadFile"
             :type="'many'"
             :items="oss"
+            :style-text="'width: 200px;'"
             :disabled="pageType === 'detail'"
             @success-callback="uploadSuccessHandle"
           ></UploadFile>

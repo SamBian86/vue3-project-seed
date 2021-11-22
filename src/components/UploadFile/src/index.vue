@@ -152,7 +152,7 @@ export default defineComponent({
     }
     const accept = ref(acceptFileObj[props.acceptFile])
 
-    console.log(items)
+    // console.log(items)
     const files = ref({
       png,
       ppt,
@@ -184,6 +184,13 @@ export default defineComponent({
       }
     )
 
+    watch(
+      () => props.styleText,
+      (value) => {
+        styleText.value = value
+      }
+    )
+
     function changeHandle(file: any) {
       uploadApi({ file: file.raw }).then((response: any) => {
         const { results } = response.data
@@ -207,7 +214,7 @@ export default defineComponent({
         const reg = /\.([^\.]+$)/g
         const m = reg.exec(item.url)
         if (m) {
-          item.suffix = m[1]
+          item.suffix = m[1].toLowerCase()
           switch (item.suffix) {
             case 'jpeg':
             case 'jpg':

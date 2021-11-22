@@ -75,8 +75,8 @@
           <UploadFile
             ref="uploadFile"
             :type="'many'"
-            :style-text="'width: 200px'"
             :items="oss"
+            :style-text="'width: 200px;'"
             :disabled="pageType === 'detail'"
             :accept-file="'imageAndVideo'"
             @success-callback="uploadSuccessHandle"

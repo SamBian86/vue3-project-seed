@@ -2118,6 +2118,14 @@ export const messages: LocaleMessageObject<VueMessageType> = {
       workAddress: '工作地址',
       liveArea: '居住区域',
       liveAddress: '居住地址',
+    },
+    CustomerWm: {
+      name: '姓名',
+      namePlaceHolder: '请输入姓名',
+      phone: '手机号',
+      phonePlaceHolder: '请输入手机号',
+      wid: '微盟业务ID',
+      birthday: '生日'
     }
   }
 }

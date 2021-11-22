@@ -192,6 +192,7 @@
             :size="StyleEnum.FORM_SIZE"
             v-model="formData.selectSituation"
             :placeholder="$t('AgedAgedinfo.selectSituationPlaceHolder')"
+            multiple
             filterable
             clearable
           >
@@ -215,7 +216,7 @@
             clearable
           >
             <el-option
-              v-for="item in getDictByType('socialsecurity')"
+              v-for="item in getDictByType('socialsecurity', 'number')"
               :key="item.dictValue"
               :label="item.dictLabel"
               :value="item.dictValue"
