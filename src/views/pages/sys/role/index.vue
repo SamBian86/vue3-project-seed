@@ -73,7 +73,7 @@
                 type="text"
                 v-if="filterPermission('sys:role:delete')"
                 :size="StyleEnum.BUTTON_SIZE"
-                @click="deleteHandle([scope.row.id])"
+                @click="deleteHandle({ id: scope.row.roleId })"
               >
                 {{ $t('table.delete') }}
               </el-button>

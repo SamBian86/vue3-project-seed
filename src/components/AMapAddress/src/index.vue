@@ -209,7 +209,7 @@ export default defineComponent({
         pageType.value = newPageType
 
         marker.value && marker.value.setPosition([lng.value, lat.value])
-        marker.value && map.value.setCenter([lng.value, lat.value])
+        map.value && map.value.setCenter([lng.value, lat.value])
       }
     )
 

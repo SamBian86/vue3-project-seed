@@ -143,9 +143,9 @@ export default defineComponent({
         formData.value['cityCode'] = selected[1]
         formData.value['areaCode'] = selected[2]
         formData.value['streetCode'] = selected[3]
-        formData.value['paddress'] = `$${getValue(selected[0])} / $${getValue(selected[1])} / $${getValue(
+        formData.value['paddress'] = `${getValue(selected[0])} / ${getValue(selected[1])} / ${getValue(
           selected[2]
-        )} / $${getValue(selected[3])}`
+        )} / ${getValue(selected[3])}`
       }
 
       function getValue(key: any) {

@@ -9,7 +9,7 @@ export enum ContentTypeEnum {
 
 export enum OptionsEnum {
   // timeout 超时
-  timeout = 10000,
+  timeout = 60000,
   withCredentials = 1
 }
 

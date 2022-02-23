@@ -1,7 +1,7 @@
 import { request } from '/@/utils/http/axios';
 // PensionResident
 
-// 保存
+// 保存住户信息
 // POST
 // /pension/resident
 export function createPensionResident(data: any) {
@@ -11,14 +11,34 @@ export function createPensionResident(data: any) {
   })
 }
 
-// 修改
-// PUT
-// /pension/resident/{id}
-export function updatePensionResident(data: any) {
-  const { id } = data
-  return request.put({
-    url: `/pension/resident/${id}`,
+// 导出
+// GET
+// /pension/resident/export
+export function exportPensionResident(params: any) {
+  return request.get({
+    url: `/pension/resident/export`,
+    responseType: `blob`,
+    params
+  })
+}
+
+// 导入
+// POST
+// /pension/resident/import
+export function importPensionResident(data: any) {
+  return request.uploadFile({
+    url: `/pension/resident/import`,
     data
+  })
+}
+
+// 获取住户信息
+// GET
+// /pension/resident/info
+export function getPensionResidentInfo(params: any) {
+  return request.get({
+    url: `/pension/resident/info`,
+    params
   })
 }
 
@@ -32,22 +52,12 @@ export function getPensionResidentPage(params: any) {
   })
 }
 
-// 列表
+// 查询家庭住户列表
 // GET
 // /pension/resident/list/all
 export function getPensionResidentListAll(params: any) {
   return request.get({
     url: `/pension/resident/list/all`,
-    params
-  })
-}
-
-// 获取住户信息
-// GET
-// /pension/resident/info
-export function getPensionResidentInfo(params: any) {
-  return request.get({
-    url: `/pension/resident/info`,
     params
   })
 }
@@ -62,12 +72,34 @@ export function getPensionResidentPhonelist(params: any) {
   })
 }
 
+// 模板下载
+// GET
+// /pension/resident/template/export
+export function exportPensionResidentTemplate(params: any) {
+  return request.get({
+    url: `/pension/resident/template/export`,
+    responseType: `blob`,
+    params
+  })
+}
+
 // 信息
 // GET
 // /pension/resident/{id}
 export function getPensionResidentById({ id }: any) {
   return request.get({
     url: `/pension/resident/${id}`,
+  })
+}
+
+// 更新住户信息
+// PUT
+// /pension/resident/{id}
+export function updatePensionResident(data: any) {
+  const { id } = data.resident
+  return request.put({
+    url: `/pension/resident/${id}`,
+    data
   })
 }
 

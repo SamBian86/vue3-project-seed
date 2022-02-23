@@ -351,9 +351,6 @@ export default defineComponent({
     // 修改住户
     function residentUpdateHandle(row: any) {
       pensionResidentFormPageType.value = 'update'
-      pensionResidentFormPageParams.value.communityCode = row.communityCode
-      pensionResidentFormPageParams.value.buildingId = row.buildingId
-      pensionResidentFormPageParams.value.familyId = row.familyId
       pensionResidentFormPageParams.value.id = row.id
       pensionResidentFormPageParams.value.disabled = true
       pensionResidentFormComponent.showDialog()

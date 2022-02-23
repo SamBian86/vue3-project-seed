@@ -10,7 +10,7 @@
         v-for="(item, index) in getMenuItems"
         :index="index"
         @click="menuClickHandle"
-        :class="{ 'el-menu-item-hide': (splitIndex !== null && index > splitIndex) || splitIndex === 0 }"
+        :class="{ 'el-menu-item-hide': (splitIndex !== null && index >= splitIndex) || splitIndex === 0 }"
       >
         <svg class="icon-svg" aria-hidden="true">
           <use :xlink:href="`#${item.icon}`" :fill="getMenuActiveId === item.id ? '#fff' : '#909399'" />
@@ -23,7 +23,7 @@
           v-for="(item, index) in getMenuItems"
           :index="index"
           @click="menuClickHandle"
-          :class="{ 'el-menu-item-hide': splitIndex !== null && index <= splitIndex }"
+          :class="{ 'el-menu-item-hide': splitIndex !== null && index < splitIndex }"
         >
           <svg class="icon-svg" aria-hidden="true">
             <use :xlink:href="`#${item.icon}`" :fill="getMenuActiveId === item.id ? '#fff' : '#909399'" />
@@ -55,23 +55,25 @@ export default defineComponent({
     const splitIndex = ref(null)
     onMounted(() => {
       setTimeout(() => {
+        // 获取水平菜单所有的li
         const lis = document.querySelectorAll('.yunlin-header-nav-menu li')
         // yunlin-header-nav-menu
         const menuEl = document.querySelector('.yunlin-header-nav-menu')
         const menuWidth = menuEl.offsetWidth
         splitIndex.value = lis.length - 1
-        // 收集li宽度
+        // 收集每个水平菜单li的宽度
         for (let i = 0; i < lis.length; i++) {
           widths.push(lis[i].offsetWidth)
         }
-        const submenuWidth = widths.pop()
+        const submenuWidth = widths.pop() // “更多菜单”的宽度
         for (let i = 0; i < widths.length; i++) {
           if (i === 0) {
-            stepWidth.push(widths[i] + submenuWidth)
+            stepWidth.push(submenuWidth)
           } else {
             stepWidth.push(stepWidth[i - 1] + widths[i])
           }
         }
+        // stepWidth的作用是将显示几个li对应的宽度存放在数组中,用于后续和menuWidth进行比较，找到合适的index
         // 找出分割的index
         splitIndex.value = getSplitIndexInArray(stepWidth, menuWidth)
 

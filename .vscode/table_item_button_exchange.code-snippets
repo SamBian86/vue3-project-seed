@@ -2,7 +2,7 @@
   "列表col区域button_上下移操作": {
     "prefix": "table_item_button_exchange",
     "body": [
-      "pgTable添加 @get-tabel-useful-data='getTableUsefulDataHandle'\r",
+      "pgTable添加 @get-tabel-useful-data=\"getTableUsefulDataHandle\"\r",
       "usePgTableComponent 添加 tableUsefulData, getTableUsefulDataHandle\r",
       "<el-button\r",
       "  type=\"text\"\r",

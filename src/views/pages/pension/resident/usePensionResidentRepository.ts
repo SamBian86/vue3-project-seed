@@ -1,9 +1,12 @@
 import { ref } from 'vue';
 import {
   createPensionResident,
+  exportPensionResident,
+  importPensionResident,
   updatePensionResident,
   getPensionResidentListAll,
   getPensionResidentPage,
+  exportPensionResidentTemplate,
   getPensionResidentById,
   getPensionResidentInfo,
   getPensionResidentPhonelist,
@@ -15,13 +18,19 @@ import { useI18n } from 'vue-i18n'
 export default function usePensionResidentRepository() {
   const { t } = useI18n()
   const formData = ref({})
+  formData.value.resident = ref({})
+  formData.value.residentHealth = ref({})
+  formData.value.residentRelationList = ref([])
   const pensionResidentInfo = ref({})
   const pensionResidentListAll = ref([])
   const pensionResidentPhonelist = ref([])
 
   // 重置表单
   const formPageResetHandle = (callback: any) => {
-    formData.value = {}
+    // formData.value = {}
+    formData.value.resident = {}
+    formData.value.residentHealth = {}
+    formData.value.residentRelationList = []
     callback && callback()
   }
 
@@ -62,11 +71,35 @@ export default function usePensionResidentRepository() {
     })
   }
 
+  // 下载
+  const exportPensionResidentTemplateHandle = (params: any) => {
+    exportPensionResidentTemplate(params)
+  }
+  
+  // 导出
+  const exportHandle = (params: any) => {
+    exportPensionResident(params)
+  }
+
   // 根据id获取数据
   const getPensionResidentByIdHandle = (params: any, callback: any) => {
     return new Promise((resolve, reject) => {
       getPensionResidentById(params).then((response: any) => {
-        formData.value = response
+        // formData.value = response
+        formData.value.resident = response.resident || {}
+        if(response.resident) {
+          formData.value.resident.hobby = response.resident.hobby ? response.resident.hobby.split(',') : []
+          formData.value.resident.serviceDemand = response.resident.serviceDemand ? response.resident.serviceDemand.split(',') : []
+        }
+
+        formData.value.residentHealth = response.residentHealth || {}
+        if (response.residentHealth) {
+          formData.value.residentHealth.drugAllergyHistory = response.residentHealth.drugAllergyHistory ? response.residentHealth.drugAllergyHistory.split(',') : []
+          formData.value.residentHealth.familyMedicalHistory = response.residentHealth.familyMedicalHistory ? response.residentHealth.familyMedicalHistory.split(',') : []
+          formData.value.residentHealth.chronicDisease = response.residentHealth.chronicDisease ? response.residentHealth.chronicDisease.split(',') : []
+        }
+
+        formData.value.residentRelationList = response.residentRelationList
         callback && callback()
         resolve(response)
       });
@@ -115,6 +148,22 @@ export default function usePensionResidentRepository() {
       });
   }
 
+  // 导入
+  const importPensionResidentHandle = (params: any) => {
+    return new Promise((resolve, reject) => {
+      importPensionResident(params).then((response: any) => {
+        const { code, msg } = response.data
+        if (code !== 0) {
+          ElMessage({
+            type: 'error',
+            message: msg
+          });
+        } else {
+          resolve(response)
+        }
+      });
+    })
+  }
 
   return {
     formData,
@@ -128,8 +177,11 @@ export default function usePensionResidentRepository() {
     pensionResidentPhonelist,
     getPensionResidentPhonelistHandle,
     getPageHandle,
+    exportPensionResidentTemplateHandle,
+    exportHandle,
     getPensionResidentByIdHandle,
     deletePensionResidentByIdHandle,
+    importPensionResidentHandle
   }
 }
 

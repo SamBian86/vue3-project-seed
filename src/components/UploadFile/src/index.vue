@@ -130,6 +130,7 @@ import jpg from '/@/assets/images/files/file_jpg.png'
 import jpeg from '/@/assets/images/files/file_jpg.png'
 import doc from '/@/assets/images/files/file_doc.png'
 import zip from '/@/assets/images/files/file_zip.png'
+import gif from '/@/assets/images/files/file_gif.png'
 import mp4_temp from '/@/assets/images/files/mp4_temp.png'
 // API封装
 import useOssFileRepository from '/@/views/pages/oss/file/useOssFileRepository' // 模板修改标记
@@ -163,7 +164,8 @@ export default defineComponent({
       jpg,
       jpeg,
       doc,
-      zip
+      zip,
+      gif
     })
     const { uploadOssFileHandle } = useOssFileRepository() // 模板修改标记
     if (!uploadApi) {

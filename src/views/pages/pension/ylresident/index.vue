@@ -78,6 +78,30 @@
               <el-button :size="StyleEnum.BUTTON_SIZE" @click="pgTableResetHandle">
                 {{ $t('table.reset') }}
               </el-button>
+              <el-button
+                type="primary"
+                v-if="filterPermission('pension:resident:export')"
+                :size="StyleEnum.BUTTON_SIZE"
+                @click="exportHandle(tableParams)"
+              >
+                {{ $t('table.export') }}
+              </el-button>
+              <el-button
+                type="primary"
+                v-if="filterPermission('pension:resident:download')"
+                :size="StyleEnum.BUTTON_SIZE"
+                @click="exportPensionResidentTemplateHandle(tableParams)"
+              >
+                {{ $t('table.download') }}
+              </el-button>
+              <UploadFileButton
+                v-if="filterPermission('pension:resident:import')"
+                ref="uploadFileButton"
+                :upload-api="importPensionResidentHandle"
+                @success-callback="uploadSuccessHandle"
+              >
+                <el-button type="primary" :size="StyleEnum.BUTTON_SIZE">{{ $t('table.import') }}</el-button>
+              </UploadFileButton>
             </el-col>
           </el-row>
         </template>
@@ -88,9 +112,9 @@
             :label="$t('PensionResident.communityName')"
           ></el-table-column>
           <el-table-column
-            prop="buildingNumber"
+            prop="buildingNo"
             :show-overflow-tooltip="true"
-            :label="$t('PensionResident.buildingNumber')"
+            :label="$t('PensionResident.buildingNo')"
             width="100"
           ></el-table-column>
           <el-table-column
@@ -118,9 +142,9 @@
             width="140"
           ></el-table-column>
           <el-table-column
-            prop="relationShipName"
+            prop="houseTypeName"
             :show-overflow-tooltip="true"
-            :label="$t('PensionResident.relationShipName')"
+            :label="$t('PensionResident.houseTypeName')"
             width="140"
           ></el-table-column>
 
@@ -180,6 +204,7 @@ import { StyleEnum } from '/@/enums/styleEnum'
 import { PgTable } from '/@/components/PgTable'
 import { SkeletonPage } from '/@/components/SkeletonPage'
 import { DialogPage } from '/@/components/DialogPage'
+import { UploadFileButton } from '/@/components/UploadFileButton'
 // hooks
 import useSkeletonPageComponent from '/@/hooks/component/skeletonPage'
 import usePgTableComponent from '/@/hooks/component/pgTable'
@@ -194,7 +219,7 @@ import PensionResidentForm from './form.vue'
 export default defineComponent({
   name: 'PensionResident', // 模板修改标记
   mixins: [tableMixin],
-  components: { PgTable, SkeletonPage, DialogPage, PensionResidentForm }, // 模板修改标记
+  components: { PgTable, SkeletonPage, DialogPage, UploadFileButton, PensionResidentForm }, // 模板修改标记
   computed: {
     ...mapGetters('permission', ['filterPermission']),
     ...mapGetters('dict', ['getDictByType'])
@@ -218,7 +243,7 @@ export default defineComponent({
     }
 
     // API相关
-    const { getPageHandle, deletePensionResidentByIdHandle } = usePensionResidentRepository() // 模板修改标记
+    const { getPageHandle, deletePensionResidentByIdHandle, importPensionResidentHandle, exportHandle, exportPensionResidentTemplateHandle } = usePensionResidentRepository() // 模板修改标记
 
     // formPage相关代码开始
     const formPage = ref(null)
@@ -260,6 +285,11 @@ export default defineComponent({
       })
     }
 
+    // 上传成功回调
+    function uploadSuccessHandle() {
+      pgTableReset()
+    }
+
     // 查询框初始化数据相关代码
     // 模板修改标记 是否有初始化数据
     // formPage相关代码开始
@@ -289,8 +319,11 @@ export default defineComponent({
       formPageParams,
       // API
       getPageHandle, // 模板修改标记 获取分页数据
-      // exportHandle // 模板修改标记 导出方法
-      deleteHandle
+      exportHandle, // 模板修改标记 导出方法
+      exportPensionResidentTemplateHandle,
+      deleteHandle,
+      uploadSuccessHandle,
+      importPensionResidentHandle
     }
   }
 })
